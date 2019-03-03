@@ -1,0 +1,25 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/Services
+/CityServicee/CityService/obj
+/CityServicee/CityService/bin/Debug/netcoreapp2.0
+/CityServicee/CityService.BAL/obj
+/CityServicee/CityService.BAL/bin/Debug/netcoreapp2.0
+/CityServicee/CityService.DATA/obj
+/CityServicee/CityService.DATA/bin/Debug/netcoreapp2.0
+/CityServicee/CityService.DTO/obj
+/CityServicee/CityService.DTO/bin/Debug/netcoreapp2.0
+/IdentityServicee/IdentityService/obj
+/IdentityServicee/IdentityService/bin/Debug/netcoreapp2.0
+/IdentityServicee/IdentityService.BAL/obj
+/IdentityServicee/IdentityService.BAL/bin/Debug/netcoreapp2.0
+/IdentityServicee/IdentityService.DATA/obj
+/IdentityServicee/IdentityService.DATA/bin/Debug/netcoreapp2.0
+/IdentityServicee/IdentityService.DTO/obj
+/IdentityServicee/IdentityService.DTO/bin/Debug/netcoreapp2.0
+/.vs/ProjectSettings.json
+/.vs/slnx.sqlite
+/.vs/config
+/.vs/VSWorkspaceState.json
