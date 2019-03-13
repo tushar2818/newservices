@@ -7,7 +7,6 @@ namespace CityService.DTO
         public Int64 Id { get; set; }
         public string CityType { get; set; }
         public string CityName { get; set; }
-        public string CityNameInOL { get; set; }
         public Nullable<Int64> StateId { get; set; }
         public Nullable<Int64> DistrictId { get; set; }
         public Nullable<Int64> TalukaId { get; set; }
@@ -16,9 +15,6 @@ namespace CityService.DTO
         public string PinCode { get; set; }
         public string MPopulation { get; set; }
         public string FPopulation { get; set; }
-        public string StationCode { get; set; }
-        public bool ForPlaceBio { get; set; }
-        public bool ForFlex { get; set; }
 
         public object CityState { get; set; }
         public object CityDistrict { get; set; }

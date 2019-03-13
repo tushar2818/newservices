@@ -15,7 +15,7 @@ namespace CityService.DATA
 
         [Required]
         public string CityName { get; set; }
-        public string CityNameInOL { get; set; }
+
 
         [ForeignKey("CityState")]
         public Nullable<Int64> StateId { get; set; }
@@ -34,8 +34,5 @@ namespace CityService.DATA
         public string PinCode { get; set; }
         public string MPopulation { get; set; }
         public string FPopulation { get; set; }
-        public string StationCode { get; set; }
-        public bool ForPlaceBio { get; set; }
-        public bool ForFlex { get; set; }
     } 
 }

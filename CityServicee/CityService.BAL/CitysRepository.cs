@@ -58,7 +58,6 @@ namespace CityService.BAL
                     talukaName = this._dbContext.Citys.Where(s => s.Id == model.TalukaId.Value).FirstOrDefault()?.CityName;
 
                 details.Add("City", model.CityName);
-                details.Add("City OL", model.CityNameInOL);
 
                 details.Add("City Type", Converters.GetCityTypeFromId(model.CityType));
                 details.Add("State", stateName);
@@ -67,16 +66,12 @@ namespace CityService.BAL
                 details.Add("Taluka", talukaName);
 
                 details.Add("PinCode", model.PinCode);
-                details.Add("Station Code", model.StationCode);
 
                 details.Add("Latitude", model.Latitude);
                 details.Add("Longitude", model.Longitude);
 
                 details.Add("Male Population", model.MPopulation);
                 details.Add("Female Population", model.FPopulation);
-
-                details.Add("For Flex", model.ForFlex);
-                details.Add("For PlaceBio", model.ForPlaceBio);
 
                 details.Add("Created Date", model.CreatedDate);
                 details.Add("Updated Date", model.UpdatedDate);

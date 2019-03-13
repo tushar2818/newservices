@@ -31,18 +31,8 @@ namespace CityService.DATA
              
         } 
 
-        //master table
-        public DbSet<BusStandMaster> BusStandMaster { get; set; }
-        public DbSet<BusTypeMaster> BusTypeMaster { get; set; }
-        public DbSet<TrainNameMaster> TrainNameMaster { get; set; }
-        public DbSet<TrainStationMaster> TrainStationMaster { get; set; }
         public DbSet<RawDataCity> RawDataCity { get; set; }
-        public DbSet<RawDataTrain> RawDataTrain { get; set; }
-
-        //detail table
         public DbSet<Citys> Citys { get; set; }
-        public DbSet<BusTimeTable> BusTimeTable { get; set; } 
-        public DbSet<TrainTimeTable> TrainTimeTable { get; set; }
 
     }  
 }
