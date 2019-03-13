@@ -1,4 +1,7 @@
 ﻿
+using CityService.DATA;
+using CityService.DTO;
+
 namespace CityService.BAL
 {
     public static class MappingConfig
@@ -8,7 +11,7 @@ namespace CityService.BAL
             AutoMapper.Mapper.Initialize(config =>
             {
                 config.CreateMissingTypeMaps = true;
-                //config.CreateMap<Citys, CitysDTO>();
+                config.CreateMap<Citys, CitysDTO>();
             });
         }
     }

@@ -38,10 +38,6 @@ namespace CityService
             services.AddDbContext<ApplicationContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:DefaultConnection"]));
             //services.AddSingleton(typeof(ICitysRepository), typeof(CitysRepository));
             services.AddTransient(typeof(ICitysRepository), typeof(CitysRepository));
-            services.AddTransient(typeof(IBusTypeMasterRepository), typeof(BusTypeMasterRepository));
-            services.AddTransient(typeof(IBusStandMasterRepository), typeof(BusStandMasterRepository));
-            services.AddTransient(typeof(IBusTimeTableRepository), typeof(BusTimeTableRepository));
-            services.AddTransient(typeof(ILookupRepository), typeof(LookupRepository));
 
             services.AddMvc().AddJsonOptions(options =>
             {
