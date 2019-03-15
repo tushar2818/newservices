@@ -1,5 +1,6 @@
 ﻿using SocietyApi.DTO;
 using System;
+using System.Collections.Generic;
 
 namespace SocietyApi.BAL
 {
@@ -7,5 +8,7 @@ namespace SocietyApi.BAL
     {
         IRequestDTO Request { get; set; }
         bool IsSuccess { get; set; }
+        List<ErrorMessageDTO> ErrorMessages { get; set; }
+        string DisplayMessage { get; set; }
     }
 }

@@ -12,17 +12,17 @@ namespace SocietyApi.DATA
 
         [Required]
         [ForeignKey("ProjectMaster")]
-        public Int64 ProjectID { get; set; }
+        public Int64 ProjectMasterID { get; set; }
         public ProjectMaster ProjectMaster { get; set; }
 
         [Required]
         [ForeignKey("EmployeeMaster")]
-        public Int64 EmployeeID { get; set; }
+        public Int64 EmployeeMasterID { get; set; }
         public EmployeeMaster EmployeeMaster { get; set; }
 
         [Required]
         [ForeignKey("DesignationMaster")]
-        public Int64 DesignationID { get; set; }
+        public Int64 DesignationMasterID { get; set; }
         public DesignationMaster DesignationMaster { get; set; }
 
     }

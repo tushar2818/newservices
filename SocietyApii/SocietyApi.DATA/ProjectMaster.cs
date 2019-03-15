@@ -8,11 +8,11 @@ namespace SocietyApi.DATA
     public class ProjectMaster : BaseModel
     {
         [Key]
-        public Int64 ProjectID { get; set; }
+        public Int64 ProjectMasterID { get; set; }
 
         [Required]
         [ForeignKey("CompanyMaster")]
-        public Int64 CompanyID { get; set; }
+        public Int64 CompanyMasterID { get; set; }
         public CompanyMaster CompanyMaster { get; set; }
 
         [Required]

@@ -8,7 +8,7 @@ namespace SocietyApi.DATA
     public class DesignationMaster : BaseModel
     {
         [Key]
-        public Int64 DesignationID { get; set; }
+        public Int64 DesignationMasterID { get; set; }
 
         [Required]
         public string Designation { get; set; }

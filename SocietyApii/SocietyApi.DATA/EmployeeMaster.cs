@@ -8,7 +8,7 @@ namespace SocietyApi.DATA
     public class EmployeeMaster : BaseModel
     {
         [Key]
-        public Int64 EmployeeID { get; set; }
+        public Int64 EmployeeMasterID { get; set; }
 
         [Required]
         public string FirstName { get; set; }
@@ -22,7 +22,7 @@ namespace SocietyApi.DATA
 
         [Required]
         [ForeignKey("DesignationMaster")]
-        public Int64 DesignationID { get; set; }
+        public Int64 DesignationMasterID { get; set; }
         public DesignationMaster DesignationMaster { get; set; }
 
         public string Email { get; set; }

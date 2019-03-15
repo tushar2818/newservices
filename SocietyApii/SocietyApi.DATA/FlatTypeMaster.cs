@@ -8,7 +8,7 @@ namespace SocietyApi.DATA
     public class FlatTypeMaster : BaseModel
     {
         [Key]
-        public Int64 FlatTypeID { get; set; }
+        public Int64 FlatTypeMasterID { get; set; }
 
         [Required]
         public string FlatType { get; set; }

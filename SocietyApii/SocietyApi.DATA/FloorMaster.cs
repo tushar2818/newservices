@@ -8,7 +8,7 @@ namespace SocietyApi.DATA
     public class FloorMaster : BaseModel
     {
         [Key]
-        public Int64 FloorID { get; set; }
+        public Int64 FloorMasterID { get; set; }
 
         [Required]
         public string FloorName { get; set; }
