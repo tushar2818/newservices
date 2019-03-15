@@ -1,4 +1,4 @@
-﻿ namespace IdentityService.DTO
+﻿namespace SocietyApi.DTO
 {
     public static class Constants
     {

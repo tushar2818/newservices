@@ -23,3 +23,11 @@
 /.vs/slnx.sqlite
 /.vs/config
 /.vs/VSWorkspaceState.json
+/SocietyApii/SocietyApi/bin/Debug/netcoreapp2.0
+/SocietyApii/SocietyApi/obj
+/SocietyApii/SocietyApi.BAL/bin/Debug/netcoreapp2.0
+/SocietyApii/SocietyApi.BAL/obj
+/SocietyApii/SocietyApi.DATA/bin/Debug/netcoreapp2.0
+/SocietyApii/SocietyApi.DATA/obj
+/SocietyApii/SocietyApi.DTO/bin/Debug/netcoreapp2.0
+/SocietyApii/SocietyApi.DTO/obj
