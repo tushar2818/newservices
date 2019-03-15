@@ -7,7 +7,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
-namespace CityService.DATA
+namespace SocietyApi.DATA
 {
     public class ApplicationContext: DbContext
     { 
@@ -23,10 +23,17 @@ namespace CityService.DATA
             {
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
             } 
-        } 
+        }
 
-        public DbSet<RawDataCity> RawDataCity { get; set; }
-        public DbSet<Citys> Citys { get; set; }
+        public DbSet<CompanyMaster> CompanyMaster { get; set; }
+        public DbSet<DesignationMaster> DesignationMaster { get; set; }
+        public DbSet<EmployeeMaster> EmployeeMaster { get; set; }
+        public DbSet<FlatMaster> FlatMaster { get; set; }
+        public DbSet<FlatTypeMaster> FlatTypeMaster { get; set; }
+        public DbSet<FloorMaster> FloorMaster { get; set; }
+        public DbSet<ProjectEmployee> ProjectEmployee { get; set; }
+        public DbSet<ProjectMaster> ProjectMaster { get; set; }
+        public DbSet<WingMaster> WingMaster { get; set; }
 
-    }  
+    }
 }
