@@ -1,6 +1,7 @@
 ﻿using SocietyApi.DATA;
 using SocietyApi.DTO;
-using System; 
+using System;
+using System.Collections.Generic;
 
 namespace SocietyApi.BAL
 {
@@ -8,7 +9,9 @@ namespace SocietyApi.BAL
     {
         protected ApplicationContext _dbContext;
         public IRequestDTO Request { get; set; }
-        public bool IsSuccess { get; set; } 
+        public bool IsSuccess { get; set; } = true;
+        public List<ErrorMessageDTO> ErrorMessages { get; set; } = new List<ErrorMessageDTO>() { new ErrorMessageDTO() { Code = "", Message = "" } };
+        public string DisplayMessage { get; set; } = "";
 
         public BaseRepository(ApplicationContext applicationContext)
         {

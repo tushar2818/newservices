@@ -8,14 +8,14 @@ namespace SocietyApi.DATA
     public class WingMaster : BaseModel
     {
         [Key]
-        public Int64 WingID { get; set; }
+        public Int64 WingMasterID { get; set; }
 
         [Required]
         public string WingName { get; set; }
 
         [Required]
         [ForeignKey("ProjectMaster")]
-        public Int64 ProjectID { get; set; }
+        public Int64 ProjectMasterID { get; set; }
         public ProjectMaster ProjectMaster { get; set; }
     }
 }
