@@ -32,7 +32,7 @@ namespace SocietyApi.BAL
         {
             var modelList = await this._dbContext.ProjectEmployee.Where(s => !s.IsDeleted && s.IsActive).ToListAsync();
             var modelDTOList = Mapper.Map<IEnumerable<ProjectEmployee>, IEnumerable<ProjectEmployeeDTO>>(modelList);
-            return modelList;
+            return modelDTOList;
         }
 
         public async Task<object> GetByIdAsync(long Id)
@@ -49,6 +49,7 @@ namespace SocietyApi.BAL
             if (model.ProjectEmployeeID == 0)
             {
                 model.CreatedDate = modelDTO.UpdatedDate;
+                model.IsActive = true;
                 await this._dbContext.ProjectEmployee.AddAsync(model);
                 await this._dbContext.SaveChangesAsync();
                 this.DisplayMessage = CommonMethods.GetMessage(this.logType, LogAction.Add);
@@ -60,7 +61,7 @@ namespace SocietyApi.BAL
                 this.DisplayMessage = CommonMethods.GetMessage(this.logType, LogAction.Update);
             }
             modelDTO = Mapper.Map<ProjectEmployee, ProjectEmployeeDTO>(model);
-            return model;
+            return modelDTO;
         }
     }
 }

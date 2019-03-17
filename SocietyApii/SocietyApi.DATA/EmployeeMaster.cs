@@ -11,6 +11,14 @@ namespace SocietyApi.DATA
         public Int64 EmployeeMasterID { get; set; }
 
         [Required]
+        public string UserID { get; set; }
+
+        [Required]
+        [ForeignKey("CompanyMaster")]
+        public Int64 CompanyMasterID { get; set; }
+        public CompanyMaster CompanyMaster { get; set; }
+
+        [Required]
         public string FirstName { get; set; }
 
         public string MiddleName { get; set; }
@@ -20,13 +28,9 @@ namespace SocietyApi.DATA
 
         public string DisplayName { get; set; }
 
-        [Required]
-        [ForeignKey("DesignationMaster")]
-        public Int64 DesignationMasterID { get; set; }
-        public DesignationMaster DesignationMaster { get; set; }
-
         public string Email { get; set; }
 
         public string MobileNo { get; set; }
+
     }
 }

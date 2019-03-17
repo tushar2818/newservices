@@ -6,10 +6,12 @@
         DesignationMaster,
         EmployeeMaster,
         FlatMaster,
+        FlatOwnerHistory,
         FlatTypeMaster,
         FloorMaster,
         ProjectEmployee,
         ProjectMaster,
+        SocietyMaster,
         WingMaster
     }
 }

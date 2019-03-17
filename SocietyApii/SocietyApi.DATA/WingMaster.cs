@@ -14,8 +14,9 @@ namespace SocietyApi.DATA
         public string WingName { get; set; }
 
         [Required]
-        [ForeignKey("ProjectMaster")]
-        public Int64 ProjectMasterID { get; set; }
-        public ProjectMaster ProjectMaster { get; set; }
+        [ForeignKey("SocietyMaster")]
+        public Int64 SocietyMasterID { get; set; }
+        public SocietyMaster SocietyMaster { get; set; }
     }
+
 }

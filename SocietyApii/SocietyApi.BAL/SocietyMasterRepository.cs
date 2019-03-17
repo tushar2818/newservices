@@ -8,49 +8,49 @@ using System.Threading.Tasks;
 
 namespace SocietyApi.BAL
 {
-    public class WingMasterRepository : BaseRepository, IWingMasterRepository
+    public class SocietyMasterRepository : BaseRepository, ISocietyMasterRepository
     {
-        LogType logType = LogType.WingMaster;
-        public WingMasterRepository(ApplicationContext applicationContext) :
+        LogType logType = LogType.SocietyMaster;
+        public SocietyMasterRepository(ApplicationContext applicationContext) :
             base(applicationContext)
         {
         }
 
         public async Task<object> DeleteAsync(long Id)
         {
-            var model = await this._dbContext.WingMaster.FindAsync(Id);
+            var model = await this._dbContext.SocietyMaster.FindAsync(Id);
             model.IsDeleted = true;
             model.UpdatedDate = Converters.GetCurrentEpochTime();
             this._dbContext.Entry(model).State = EntityState.Modified;
             await this._dbContext.SaveChangesAsync();
-            var modelDTO = Mapper.Map<WingMaster, WingMasterDTO>(model);
+            var modelDTO = Mapper.Map<SocietyMaster, SocietyMasterDTO>(model);
             this.DisplayMessage = CommonMethods.GetMessage(this.logType, LogAction.Delete);
             return modelDTO;
         }
 
         public async Task<object> GetAllAsync()
         {
-            var modelList = await this._dbContext.WingMaster.Where(s => !s.IsDeleted && s.IsActive).ToListAsync();
-            var modelDTOList = Mapper.Map<IEnumerable<WingMaster>, IEnumerable<WingMasterDTO>>(modelList);
+            var modelList = await this._dbContext.SocietyMaster.Where(s => !s.IsDeleted && s.IsActive).ToListAsync();
+            var modelDTOList = Mapper.Map<IEnumerable<SocietyMaster>, IEnumerable<SocietyMasterDTO>>(modelList);
             return modelDTOList;
         }
 
         public async Task<object> GetByIdAsync(long Id)
         {
-            var model = await this._dbContext.WingMaster.FindAsync(Id);
-            var modelDTO = Mapper.Map<WingMaster, WingMasterDTO>(model);
+            var model = await this._dbContext.SocietyMaster.FindAsync(Id);
+            var modelDTO = Mapper.Map<SocietyMaster, SocietyMasterDTO>(model);
             return modelDTO;
         }
 
-        public async Task<object> SaveUpdateAsync(WingMasterDTO modelDTO)
+        public async Task<object> SaveUpdateAsync(SocietyMasterDTO modelDTO)
         {
             modelDTO.UpdatedDate = Converters.GetCurrentEpochTime();
-            var model = Mapper.Map<WingMasterDTO, WingMaster>(modelDTO);
-            if (model.WingMasterID == 0)
+            var model = Mapper.Map<SocietyMasterDTO, SocietyMaster>(modelDTO);
+            if (model.SocietyMasterID == 0)
             {
                 model.CreatedDate = modelDTO.UpdatedDate;
                 model.IsActive = true;
-                await this._dbContext.WingMaster.AddAsync(model);
+                await this._dbContext.SocietyMaster.AddAsync(model);
                 await this._dbContext.SaveChangesAsync();
                 this.DisplayMessage = CommonMethods.GetMessage(this.logType, LogAction.Add);
             }
@@ -60,7 +60,7 @@ namespace SocietyApi.BAL
                 await this._dbContext.SaveChangesAsync();
                 this.DisplayMessage = CommonMethods.GetMessage(this.logType, LogAction.Update);
             }
-            modelDTO = Mapper.Map<WingMaster, WingMasterDTO>(model);
+            modelDTO = Mapper.Map<SocietyMaster, SocietyMasterDTO>(model);
             return modelDTO;
         }
     }

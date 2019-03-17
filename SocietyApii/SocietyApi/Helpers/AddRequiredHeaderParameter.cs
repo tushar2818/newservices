@@ -13,6 +13,7 @@ namespace SocietyApi
 
             operation.Parameters.Add(new HeaderParameter() { Name = "ApplicationId", In = "header", Required = true, Type = "string", Description = "Web Application Id" });
             operation.Parameters.Add(new HeaderParameter() { Name = "ApplicationToken", In = "header", Required = true, Type = "string", Description = "Web Application Token" });
+            operation.Parameters.Add(new HeaderParameter() { Name = "CompanyId", In = "header", Required = true, Type = "string", Description = "Company Id" });
         }
     }
 }

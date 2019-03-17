@@ -20,6 +20,8 @@
                     return "Employee Master";
                 case LogType.FlatMaster:
                     return "Flat Master";
+                case LogType.FlatOwnerHistory:
+                    return "Flat Owner History";
                 case LogType.FlatTypeMaster:
                     return "Flat Type Master";
                 case LogType.FloorMaster:
@@ -28,6 +30,8 @@
                     return "Project Employee";
                 case LogType.ProjectMaster:
                     return "Project Master";
+                case LogType.SocietyMaster:
+                    return "Society Master";
                 case LogType.WingMaster:
                     return "Wing Master"; 
             }
