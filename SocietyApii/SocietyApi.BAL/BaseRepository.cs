@@ -10,7 +10,7 @@ namespace SocietyApi.BAL
         protected ApplicationContext _dbContext;
         public IRequestDTO Request { get; set; }
         public bool IsSuccess { get; set; } = true;
-        public List<ErrorMessageDTO> ErrorMessages { get; set; } = new List<ErrorMessageDTO>() { new ErrorMessageDTO() { Code = "", Message = "" } };
+        public List<ErrorMessageDTO> ErrorMessages { get; set; }
         public string DisplayMessage { get; set; } = "";
 
         public BaseRepository(ApplicationContext applicationContext)

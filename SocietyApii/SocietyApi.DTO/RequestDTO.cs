@@ -4,5 +4,6 @@
     {
         public string applicationId { get; set; }
         public string applicationToken { get; set; }
+        public string companyId { get; set; }
     }
 }

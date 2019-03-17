@@ -31,9 +31,16 @@ namespace SocietyApi.BAL
 
         public async Task<object> GetAllAsync()
         {
+            //try
+            //{
+            //    await this._dbContext.Database.EnsureCreatedAsync();
+            //}
+            //catch (System.Exception ex )
+            //{
+            //}
             var modelList = await this._dbContext.FloorMaster.Where(s => !s.IsDeleted && s.IsActive).ToListAsync();
             var modelDTOList = Mapper.Map<IEnumerable<FloorMaster>, IEnumerable<FloorMasterDTO>>(modelList);
-            return modelList;
+            return modelDTOList;
         }
 
         public async Task<object> GetByIdAsync(long Id)
@@ -50,6 +57,7 @@ namespace SocietyApi.BAL
             if (model.FloorMasterID == 0)
             {
                 model.CreatedDate = modelDTO.UpdatedDate;
+                model.IsActive = true;
                 await this._dbContext.FloorMaster.AddAsync(model);
                 await this._dbContext.SaveChangesAsync();
                 this.DisplayMessage = CommonMethods.GetMessage(this.logType, LogAction.Add);
@@ -61,7 +69,7 @@ namespace SocietyApi.BAL
                 this.DisplayMessage = CommonMethods.GetMessage(this.logType, LogAction.Update);
             }
             modelDTO = Mapper.Map<FloorMaster, FloorMasterDTO>(model);
-            return model;
+            return modelDTO;
         }
     }
 }

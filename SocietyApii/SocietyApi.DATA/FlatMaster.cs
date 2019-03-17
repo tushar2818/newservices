@@ -16,6 +16,10 @@ namespace SocietyApi.DATA
 
         public string BuiltupArea { get; set; }
 
+        public string PossesionDate { get; set; }
+
+        public string Maintenance { get; set; }
+
         [Required]
         [ForeignKey("WingMaster")]
         public Int64 WingMasterID { get; set; }
@@ -30,17 +34,7 @@ namespace SocietyApi.DATA
         [ForeignKey("FlatTypeMaster")]
         public Int64 FlatTypeMasterID { get; set; }
         public FlatTypeMaster FlatTypeMaster { get; set; }
-
-        [Required]
-        [ForeignKey("EmployeeMasterOwner")]
-        public Int64 EmployeeMasterOwnerID { get; set; }
-        public EmployeeMaster EmployeeMasterOwner { get; set; }
-
-        [ForeignKey("EmployeeMasterRental")]
-        public Int64 EmployeeMasterRentalID { get; set; }
-        public EmployeeMaster EmployeeMasterRental { get; set; }
-
-        public string PossesionDate { get; set; }
-        public string Maintenance { get; set; }
     }
+
+   
 }

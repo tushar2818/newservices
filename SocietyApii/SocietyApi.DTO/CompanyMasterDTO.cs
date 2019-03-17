@@ -4,7 +4,8 @@ namespace SocietyApi.DTO
 {
     public class CompanyMasterDTO : BaseModelDTO
     {
-        public Int64 CompanyID { get; set; }
+        public Int64 CompanyMasterID { get; set; }
+        public string UserID { get; set; }
         public string CompanyName { get; set; }
         public string Email { get; set; }
         public string LandLine { get; set; }

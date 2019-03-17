@@ -29,10 +29,12 @@ namespace SocietyApi.DATA
         public DbSet<DesignationMaster> DesignationMaster { get; set; }
         public DbSet<EmployeeMaster> EmployeeMaster { get; set; }
         public DbSet<FlatMaster> FlatMaster { get; set; }
+        public DbSet<FlatOwnerHistory> FlatOwnerHistory { get; set; }
         public DbSet<FlatTypeMaster> FlatTypeMaster { get; set; }
         public DbSet<FloorMaster> FloorMaster { get; set; }
         public DbSet<ProjectEmployee> ProjectEmployee { get; set; }
         public DbSet<ProjectMaster> ProjectMaster { get; set; }
+        public DbSet<SocietyMaster> SocietyMaster { get; set; }
         public DbSet<WingMaster> WingMaster { get; set; }
 
     }

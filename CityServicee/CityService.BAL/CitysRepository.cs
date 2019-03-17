@@ -90,6 +90,8 @@ namespace CityService.BAL
             if (model.Id == 0)
             {
                 model.CreatedDate = modelDTO.UpdatedDate;
+                model.IsActive = true;
+                model.IsDeleted = false;
                 this._dbContext.Citys.Add(model);
                 this._dbContext.SaveChanges();
             }

@@ -17,7 +17,6 @@ namespace SocietyApi.BAL
                 //config.CreateMap<FlatMaster, FlatMasterDTO>();
                 //config.CreateMap<FlatTypeMaster, FlatTypeMasterDTO>();
                 //config.CreateMap<FloorMaster, FloorMasterDTO>();
-                //config.CreateMap<IEnumerable<FloorMaster>, IEnumerable<FloorMasterDTO>>();
                 //config.CreateMap<ProjectEmployee, ProjectEmployeeDTO>();
                 //config.CreateMap<ProjectMaster, ProjectMasterDTO>();
                 //config.CreateMap<WingMaster, WingMasterDTO>();

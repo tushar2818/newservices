@@ -42,10 +42,12 @@ namespace SocietyApi
             services.AddTransient(typeof(IDesignationMasterRepository), typeof(DesignationMasterRepository));
             services.AddTransient(typeof(IEmployeeMasterRepository), typeof(EmployeeMasterRepository));
             services.AddTransient(typeof(IFlatMasterRepository), typeof(FlatMasterRepository));
+            services.AddTransient(typeof(IFlatOwnerHistoryRepository), typeof(FlatOwnerHistoryRepository));
             services.AddTransient(typeof(IFlatTypeMasterRepository), typeof(FlatTypeMasterRepository));
             services.AddTransient(typeof(IFloorMasterRepository), typeof(FloorMasterRepository));
             services.AddTransient(typeof(IProjectEmployeeRepository), typeof(ProjectEmployeeRepository));
             services.AddTransient(typeof(IProjectMasterRepository), typeof(ProjectMasterRepository));
+            services.AddTransient(typeof(ISocietyMasterRepository), typeof(SocietyMasterRepository));
             services.AddTransient(typeof(IWingMasterRepository), typeof(WingMasterRepository));
 
             services.AddMvc().AddJsonOptions(options =>

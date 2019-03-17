@@ -10,6 +10,8 @@ namespace SocietyApi.DATA
         [Key]
         public Int64 CompanyMasterID { get; set; }
 
+        public string UserID { get; set; }
+
         [Required]
         public string CompanyName { get; set; }
 
