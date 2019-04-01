@@ -5,20 +5,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SocietyApi.DATA
 {
     [Table("FlatMaster")]
-    public class FlatMaster : BaseModel
+    public class FlatMaster 
     {
         [Key]
         public Int64 FlatMasterID { get; set; }
-
-        public string FlatNo { get; set; }
-
-        public string CarpetArea { get; set; }
-
-        public string BuiltupArea { get; set; }
-
-        public string PossesionDate { get; set; }
-
-        public string Maintenance { get; set; }
 
         [Required]
         [ForeignKey("WingMaster")]
@@ -26,15 +16,45 @@ namespace SocietyApi.DATA
         public WingMaster WingMaster { get; set; }
 
         [Required]
+        [ForeignKey("FlatTypeMaster")]
+        public Int64 FlatTypeMasterID { get; set; }
+        public FlatTypeMaster FlatTypeMaster { get; set; }
+
+        [Required]
         [ForeignKey("FloorMaster")]
         public Int64 FloorMasterID { get; set; }
         public FloorMaster FloorMaster { get; set; }
 
         [Required]
-        [ForeignKey("FlatTypeMaster")]
-        public Int64 FlatTypeMasterID { get; set; }
-        public FlatTypeMaster FlatTypeMaster { get; set; }
-    }
+        public string FlatNo { get; set; }
 
-   
+        [Required]
+        public string FlatName { get; set; }
+
+        public Int64 CarpetArea { get; set; }
+
+        public Int64 BuiltupArea { get; set; }
+
+        public bool IsSold { get; set; }
+
+        public Int64 PossesionDate { get; set; }
+
+        public bool VisitorVerificationRequired { get; set; }
+
+        public decimal Maintenance { get; set; }
+
+        [Required]
+        public bool IsActive { get; set; }
+
+        [Required]
+        public bool IsDeleted { get; set; }
+
+        [Required]
+        public Int64 CreatedDate { get; set; }
+
+        [Required]
+        public Int64 UpdatedDate { get; set; }
+
+    }
+     
 }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System; 
 
 namespace IdentityService.DTO
 {
@@ -73,11 +71,7 @@ namespace IdentityService.DTO
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
-        public string PasswordHash2 { get; set; }
         public string CreatedBy { get; set; }
         public string UpdatedBy { get; set; }
-     
-        public object CreatedUser { get; set; }
-        public object UpdatedUser { get; set; }
     }
 }

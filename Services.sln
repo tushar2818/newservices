@@ -25,13 +25,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityService.DTO", "Iden
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SocietyApii", "SocietyApii", "{53DDD5DC-7164-4048-8CEB-A19C86CBD255}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocietyApi", "SocietyApii\SocietyApi\SocietyApi.csproj", "{80E24C71-D1E7-4E5F-A699-E19CE72748F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocietyApi", "SocietyApii\SocietyApi\SocietyApi.csproj", "{80E24C71-D1E7-4E5F-A699-E19CE72748F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocietyApi.BAL", "SocietyApii\SocietyApi.BAL\SocietyApi.BAL.csproj", "{E716D166-C1FE-40FB-AF0E-D86912C0CD18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocietyApi.BAL", "SocietyApii\SocietyApi.BAL\SocietyApi.BAL.csproj", "{E716D166-C1FE-40FB-AF0E-D86912C0CD18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocietyApi.DATA", "SocietyApii\SocietyApi.DATA\SocietyApi.DATA.csproj", "{EE3310B2-515A-4ABC-885D-1B56ACECE935}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocietyApi.DATA", "SocietyApii\SocietyApi.DATA\SocietyApi.DATA.csproj", "{EE3310B2-515A-4ABC-885D-1B56ACECE935}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocietyApi.DTO", "SocietyApii\SocietyApi.DTO\SocietyApi.DTO.csproj", "{2192E8C4-87A6-4528-9D9C-EB4025CC2657}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocietyApi.DTO", "SocietyApii\SocietyApi.DTO\SocietyApi.DTO.csproj", "{2192E8C4-87A6-4528-9D9C-EB4025CC2657}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

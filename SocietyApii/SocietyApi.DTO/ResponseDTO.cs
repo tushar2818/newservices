@@ -7,9 +7,10 @@ namespace SocietyApi.DTO
         public object Result { get; set; }
         public string DisplayMessage { get; set; } = "";
         public List<ErrorMessageDTO> ErrorMessages { get; set; }
-        public string applicationId { get; set; }
-        public string applicationToken { get; set; }
-        public string companyId { get; set; }
 
+        public string Token { get; set; }
+        public string ClientID { get; set; }
+        public string CompanyID { get; set; }
+        public string UserID { get; set; }
     }
 }

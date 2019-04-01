@@ -17,11 +17,6 @@ namespace SocietyApi
 {
     public class Startup
     {
-        //public Startup(IConfiguration configuration)
-        //{
-        //    Configuration = configuration;
-        //}
-
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -40,14 +35,10 @@ namespace SocietyApi
             services.AddDbContext<ApplicationContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:DefaultConnection"]));
             services.AddTransient(typeof(ICompanyMasterRepository), typeof(CompanyMasterRepository));
             services.AddTransient(typeof(IDesignationMasterRepository), typeof(DesignationMasterRepository));
-            services.AddTransient(typeof(IEmployeeMasterRepository), typeof(EmployeeMasterRepository));
             services.AddTransient(typeof(IFlatMasterRepository), typeof(FlatMasterRepository));
-            services.AddTransient(typeof(IFlatOwnerHistoryRepository), typeof(FlatOwnerHistoryRepository));
             services.AddTransient(typeof(IFlatTypeMasterRepository), typeof(FlatTypeMasterRepository));
             services.AddTransient(typeof(IFloorMasterRepository), typeof(FloorMasterRepository));
-            services.AddTransient(typeof(IProjectEmployeeRepository), typeof(ProjectEmployeeRepository));
             services.AddTransient(typeof(IProjectMasterRepository), typeof(ProjectMasterRepository));
-            services.AddTransient(typeof(ISocietyMasterRepository), typeof(SocietyMasterRepository));
             services.AddTransient(typeof(IWingMasterRepository), typeof(WingMasterRepository));
 
             services.AddMvc().AddJsonOptions(options =>

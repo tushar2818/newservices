@@ -10,51 +10,50 @@ namespace SocietyApi.DTO
         public static List<dynamic> ConvertToDataTable(DataTable dataTable)
         {
             var result = new List<dynamic>();
-            foreach (DataRow row in dataTable.Rows)
-            {
-                dynamic dyn = new ExpandoObject();
-                foreach (DataColumn column in dataTable.Columns)
-                {
-                    var dic = (IDictionary<string, object>)dyn;
-                    dic[column.ColumnName] = row[column];
-                }
-                result.Add(dyn);
-            }
+            //foreach (DataRow row in dataTable.Rows)
+            //{
+            //    ExpandoObject dyn = new ExpandoObject();
+            //    foreach (DataColumn column in dataTable.Columns)
+            //    {
+            //        var dic = (IDictionary<string, object>)dyn;
+            //        dic[column.ColumnName] = row[column];
+            //    }
+            //    result.Add(dyn);
+            //}
             return result;
         }
+
         public static dynamic ConvertToModel(DataTable dataTable)
         {
             var result = new List<dynamic>();
-            foreach (DataRow row in dataTable.Rows)
-            {
-                dynamic dyn = new ExpandoObject();
-                foreach (DataColumn column in dataTable.Columns)
-                {
-                    var dic = (IDictionary<string, object>)dyn;
-                    dic[column.ColumnName] = row[column];
-                }
-                result.Add(dyn);
-            }
+            //foreach (DataRow row in dataTable.Rows)
+            //{
+            //    dynamic dyn = new ExpandoObject();
+            //    foreach (DataColumn column in dataTable.Columns)
+            //    {
+            //        var dic = (IDictionary<string, object>)dyn;
+            //        dic[column.ColumnName] = row[column];
+            //    }
+            //    result.Add(dyn);
+            //}
             return result[0];
         }
-        public static string GetEpochTime(DateTime dateTime)
+
+        public static Int64 GetEpochTime(DateTime dateTime)
         {
             dateTime = GetIndianDate(dateTime);
             var epoch = (long)((dateTime.ToUniversalTime() -
                 new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds);
 
-            string epochDateTime = epoch.ToString();
+            return epoch;
 
-            return epochDateTime;
         }
-        public static string GetCurrentEpochTime()
+        public static Int64 GetCurrentEpochTime()
         {
             var epoch = (long)(GetIndianDate(DateTime.UtcNow) -
                 new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;
 
-            string epochDateTime = epoch.ToString();
-
-            return epochDateTime;
+            return epoch;
         }
 
         public static object GetCityTypeFromId(string cityType)
@@ -66,25 +65,25 @@ namespace SocietyApi.DTO
                 cityType == "5" ? "Area" : "Address";
         }
 
-        public static string epoch2string(string epoch)
+        public static string epoch2string(Int64 epoch)
         {
-            if (string.IsNullOrEmpty(epoch))
-                return epoch;
+            if (epoch == 0)
+                return string.Empty;
 
-            var utime = (long)Convert.ToDouble(epoch);
-
-            string epochDateTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(utime).ToString(Constants.DATE_TIME_FORMAT);
+            string epochDateTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(epoch).
+                ToString(Constants.DATE_TIME_FORMAT);
 
             return epochDateTime;
         }
-        public static DateTime epoch2DateTime(string epoch)
+
+        public static DateTime epoch2DateTime(Int64 epoch)
         {
-            if (string.IsNullOrEmpty(epoch))
+            if (epoch == 0)
                 return new DateTime();
 
-            var utime = (long)Convert.ToDouble(epoch);
-            return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(utime);
+            return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(epoch);
         }
+
         public static DateTime GetIndianDate(DateTime dateTime = new DateTime())
         {
             TimeZoneInfo ZONE = TimeZoneInfo.FindSystemTimeZoneById(Constants.DATE_TIME_ZONE);
@@ -95,5 +94,6 @@ namespace SocietyApi.DTO
                 indianTime = TimeZoneInfo.ConvertTime(dateTime, ZONE);
             return indianTime;
         }
+
     }
 }

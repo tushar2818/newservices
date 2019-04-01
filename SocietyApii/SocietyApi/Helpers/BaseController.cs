@@ -14,18 +14,20 @@ namespace SocietyApi
         {
             base.OnActionExecuting(ctx);
             var allHeaders = this.ControllerContext.HttpContext.Request.Headers;
-            string applicationId = "", applicationToken = "", companyId = "";
+            string Token = "", ClientID = "", CompanyID = "", UserID = "";
 
-            if (allHeaders.ContainsKey("ApplicationId")) applicationId = allHeaders["ApplicationId"];
-            if (allHeaders.ContainsKey("ApplicationToken")) applicationToken = allHeaders["ApplicationToken"];
-            if (allHeaders.ContainsKey("CompanyId")) companyId = allHeaders["CompanyId"];
+            if (allHeaders.ContainsKey("Token")) Token = allHeaders["Token"];
+            if (allHeaders.ContainsKey("ClientID")) ClientID = allHeaders["ClientID"];
+            if (allHeaders.ContainsKey("CompanyID")) CompanyID = allHeaders["CompanyID"];
+            if (allHeaders.ContainsKey("UserID")) UserID = allHeaders["UserID"];
 
             this._request = new RequestDTO();
             this._response = new ResponseDTO();
 
-            this._request.applicationId = this._response.applicationId = applicationId;
-            this._request.applicationToken = this._response.applicationToken = applicationToken;
-            this._request.companyId = this._response.companyId = companyId;
+            this._request.Token = this._response.Token = Token;
+            this._request.ClientID = this._response.ClientID = ClientID;
+            this._request.CompanyID = this._response.CompanyID = CompanyID;
+            this._request.UserID = this._response.UserID = UserID; 
 
             this.IsTokenVallid();
         }

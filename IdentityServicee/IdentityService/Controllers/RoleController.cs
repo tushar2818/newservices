@@ -20,10 +20,33 @@ namespace IdentityService.Controllers
             base.OnActionExecuting(ctx);
             _repository.Request = (RequestDTO)this._request;
         }
+
         protected override void Dispose(bool disposing)
         {
+            _repository.roleManager.Dispose();
             _repository.Dispose();
             base.Dispose(disposing);
+        }
+
+        /// <summary>
+        /// Create Database
+        /// </summary>
+        /// <returns>Status</returns>
+        [HttpGet]
+        [Route("api/roles/createdatabase")]
+        public async Task<object> CreateDatabase()
+        {
+            try
+            {
+                var data = await _repository.CreateDatabaseAsync();
+                _response.Result = data;
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<ErrorMessageDTO>() { new ErrorMessageDTO() { Message = ex.ToString() } };
+            }
+            return _response;
         }
 
         /// <summary>
@@ -76,7 +99,7 @@ namespace IdentityService.Controllers
         /// <returns>Added/Updated role details</returns>
         [HttpPost]
         [Route("api/roles/saveupdate")]
-        public async Task<object> Post([FromBody]RolesDTO model)
+        public async Task<object> Post([FromBody]ApplicationRoleDTO model)
         {
             try
             {

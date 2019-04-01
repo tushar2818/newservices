@@ -1,4 +1,5 @@
-﻿using IdentityService.DATA;
+﻿using AutoMapper;
+using IdentityService.DATA;
 using IdentityService.DTO;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -10,23 +11,37 @@ namespace IdentityService.BAL
 {
     public class RoleRepository : BaseRepository, IRoleRepository
     {
-        public RoleManager<IdentityRole> roleManager { get; set; }
+        public RoleManager<ApplicationRole> roleManager { get; set; }
 
         public RoleRepository(ApplicationContext applicationContext,
-            RoleManager<IdentityRole> roleManager) : base(applicationContext)
+            RoleManager<ApplicationRole> roleManager) : base(applicationContext)
         {
             this.roleManager = roleManager;
         }
+
+        public async Task<object> CreateDatabaseAsync()
+        {
+            try
+            {
+                var status = await this._dbContext.Database.EnsureCreatedAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+            }
+            return false;
+        }
+
 
         public async Task<object> Delete(string Id)
         {
             var model = await this.roleManager.FindByIdAsync(Id);
             IdentityResult result = await this.roleManager.DeleteAsync(model);
-            this.roleManager.Dispose();
             if (result.Succeeded)
             {
                 this.DisplayMessage = CommonMethods.GetMessage(LogType.Role,LogAction.Delete);
-                return new RolesDTO() { Id = model.Id, Name = model.Name };
+                ApplicationRoleDTO modelDTO = Mapper.Map<ApplicationRole, ApplicationRoleDTO>(model);
+                return modelDTO;
             }
             else
             {
@@ -42,36 +57,49 @@ namespace IdentityService.BAL
         public async Task<object> GetAll()
         {
             var result = await this.roleManager.Roles.ToListAsync();
-            this.roleManager.Dispose();
-            return result;
+            IEnumerable<ApplicationRoleDTO> modelListDTO =
+                Mapper.Map<IEnumerable<ApplicationRole>, IEnumerable<ApplicationRoleDTO>>(result);
+            return modelListDTO;
         }
 
         public async Task<object> GetById(string Id)
         {
             var model = await this.roleManager.FindByIdAsync(Id);
-            RolesDTO modelDTO = new RolesDTO() { Id = model.Id, Name = model.Name };
-            this.roleManager.Dispose();
+            ApplicationRoleDTO modelDTO = Mapper.Map<ApplicationRole, ApplicationRoleDTO>(model);
             return modelDTO;
         }
 
-        public async Task<object> SaveUpdate(RolesDTO modelDTO)
+        public async Task<object> SaveUpdate(ApplicationRoleDTO modelDTO)
         {
             IdentityResult result;
-            IdentityRole model;
+            ApplicationRole model;
             if (string.IsNullOrEmpty(modelDTO.Id))
             {
-                model = new IdentityRole() { Name = modelDTO.Name };
+                model = new ApplicationRole() {
+                    Name = modelDTO.Name,
+                    Priority =modelDTO.Priority,
+                    CreatedDate = Converters.GetCurrentEpochTime(),
+                    UpdatedDate = Converters.GetCurrentEpochTime(),
+                    IsActive = true,
+                    IsDeleted = false
+                };
                 result = await this.roleManager.CreateAsync(model);
-                this.DisplayMessage = CommonMethods.GetMessage(LogType.Role,LogAction.Add);
+                modelDTO = Mapper.Map<ApplicationRole, ApplicationRoleDTO>(model);
+                this.DisplayMessage = CommonMethods.GetMessage(LogType.Role, LogAction.Add);
             }
             else
             {
                 model = await this.roleManager.FindByIdAsync(modelDTO.Id);
                 model.Name = modelDTO.Name;
+                model.Priority = modelDTO.Priority;
+                model.UpdatedDate = Converters.GetCurrentEpochTime();
+                model.IsActive = modelDTO.IsActive;
+                model.IsDeleted = modelDTO.IsDeleted;
+
                 result = await this.roleManager.UpdateAsync(model);
-                this.DisplayMessage = CommonMethods.GetMessage(LogType.Role,LogAction.Update);
+                modelDTO = Mapper.Map<ApplicationRole, ApplicationRoleDTO>(model);
+                this.DisplayMessage = CommonMethods.GetMessage(LogType.Role, LogAction.Update);
             }
-            this.roleManager.Dispose();
             if (result.Succeeded)
             {
                 modelDTO.Id = model.Id;
