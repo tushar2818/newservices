@@ -2,8 +2,9 @@
 {
     public interface IBaseDTO
     {
-        string applicationId { get; set; }
-        string applicationToken { get; set; }
-        string companyId { get; set; } 
+        string Token { get; set; }
+        string ClientID { get; set; }
+        string CompanyID { get; set; }
+        string UserID { get; set; }
     }
 }

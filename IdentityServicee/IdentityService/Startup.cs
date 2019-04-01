@@ -17,11 +17,6 @@ namespace IdentityService
 {
     public class Startup
     {
-        //public Startup(IConfiguration configuration)
-        //{
-        //    Configuration = configuration;
-        //}
-
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -37,8 +32,13 @@ namespace IdentityService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:DefaultConnection"]));
+            services.AddDbContext<ApplicationContext>(opts => 
+            opts.UseSqlServer(Configuration["ConnectionString:DefaultConnection"],
+            b => b.MigrationsAssembly("IdentityService")));
+             
             services.AddTransient(typeof(IRoleRepository), typeof(RoleRepository));
+            services.AddTransient(typeof(IUserRepository), typeof(UserRepository));
+            services.AddTransient(typeof(IIdentityRepository), typeof(IdentityRepository));
 
             services.AddMvc().AddJsonOptions(options =>
             {
@@ -59,7 +59,7 @@ namespace IdentityService
 
             });
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
                .AddEntityFrameworkStores<ApplicationContext>()
                .AddDefaultTokenProviders(); 
 

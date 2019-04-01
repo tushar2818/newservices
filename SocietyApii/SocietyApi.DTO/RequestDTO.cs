@@ -2,8 +2,9 @@
 {
     public class RequestDTO : IRequestDTO
     {
-        public string applicationId { get; set; }
-        public string applicationToken { get; set; }
-        public string companyId { get; set; }
+        public string Token { get; set; }
+        public string ClientID { get; set; }
+        public string CompanyID { get; set; }
+        public string UserID { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using IdentityService.DTO;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace IdentityService.BAL
 {
@@ -35,5 +36,7 @@ namespace IdentityService.BAL
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+        
     }
 }

@@ -9,5 +9,6 @@ namespace IdentityService.DTO
         public List<ErrorMessageDTO> ErrorMessages { get; set; } = new List<ErrorMessageDTO>() { new ErrorMessageDTO() { Code = "", Message = "" } };
         public string applicationId { get; set; }
         public string applicationToken { get; set; }
+        public string userID { get; set; }
     }
 }

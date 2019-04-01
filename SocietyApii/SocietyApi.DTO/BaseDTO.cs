@@ -1,10 +1,12 @@
-﻿namespace SocietyApi.DTO
+﻿using System;
+
+namespace SocietyApi.DTO
 {
     public class BaseModelDTO
     {
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
-        public string CreatedDate { get; set; }
-        public string UpdatedDate { get; set; }
+        public Int64 CreatedDate { get; set; }
+        public Int64 UpdatedDate { get; set; }
     }
 }

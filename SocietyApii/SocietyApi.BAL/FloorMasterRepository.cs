@@ -35,7 +35,7 @@ namespace SocietyApi.BAL
             //{
             //    await this._dbContext.Database.EnsureCreatedAsync();
             //}
-            //catch (System.Exception ex )
+            //catch (System.Exception ex)
             //{
             //}
             var modelList = await this._dbContext.FloorMaster.Where(s => !s.IsDeleted && s.IsActive).ToListAsync();

@@ -12,7 +12,7 @@ using IdentityService.Models;
 
 namespace IdentityService.DATA
 {
-    public class ApplicationContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationContext : IdentityDbContext<ApplicationUser,ApplicationRole,string>
     {
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)

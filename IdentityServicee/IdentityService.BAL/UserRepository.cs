@@ -23,32 +23,42 @@ namespace IdentityService.BAL
         public async Task<object> Delete(string userId)
         {
             var model = await this.userManager.FindByIdAsync(userId);
-            model.IsDeleted = true;
-            model.UpdatedDate = Converters.GetCurrentEpochTime();
-            await this.userManager.UpdateAsync(model);
-            this.userManager.Dispose();
-            return model;
+            if (model != null)
+            {
+                model.IsDeleted = true;
+                model.UpdatedDate = Converters.GetCurrentEpochTime();
+                await this.userManager.UpdateAsync(model);
+                ApplicationUserDTO modelDTO = Mapper.Map<ApplicationUser, ApplicationUserDTO>(model);
+                return model;
+            }
+            else
+            {
+                this.IsSuccess = false;
+                this.ErrorMessages = new List<ErrorMessageDTO>() {
+                    new ErrorMessageDTO(){Message="User not found with user id "+userId }
+                };
+                return null;
+            }           
         }
 
         public async Task<object> GetAll()
         {
             var result = await this.userManager.Users.ToListAsync();
-            this.userManager.Dispose();
-            return result;
+            IEnumerable<ApplicationUserDTO> modelListDTO =
+                Mapper.Map<IEnumerable<ApplicationUser>, IEnumerable<ApplicationUserDTO>>(result);
+            return modelListDTO;
         }
 
         public async Task<object> GetById(string userId)
         {
             var model = await this.userManager.FindByIdAsync(userId);
             ApplicationUserDTO modelDTO = Mapper.Map<ApplicationUser, ApplicationUserDTO>(model);
-            this.userManager.Dispose();
             return modelDTO;
         }
 
         public async Task<object> SaveUpdate(ApplicationUserDTO modelDTO)
         {
             ApplicationUser model;
-            bool isUserExists = true;
             IdentityResult result = null;
             modelDTO.UpdatedDate = Converters.GetCurrentEpochTime();
             if (string.IsNullOrEmpty(modelDTO.Id))
@@ -61,19 +71,15 @@ namespace IdentityService.BAL
                     LastName = modelDTO.LastName,
                     Email = modelDTO.Email,
                     PhoneNumber = modelDTO.PhoneNumber,
-                    PasswordHash2 = modelDTO.PasswordHash2,
+                    CreatedBy=this.Request.userID,
+                    UpdatedBy=this.Request.userID,
 
-                    IsActive = modelDTO.IsActive,
-                    IsDeleted = modelDTO.IsDeleted,
+                    IsActive = true,
+                    IsDeleted = false,
                     CreatedDate = modelDTO.UpdatedDate,
                     UpdatedDate = modelDTO.UpdatedDate,
                 };
-                var existingUser = await this.userManager.FindByNameAsync(model.UserName);
-                if (existingUser == null)
-                {
-                    isUserExists = false;
-                    result = await this.userManager.CreateAsync(model);
-                }
+                result = await this.userManager.CreateAsync(model, modelDTO.PasswordHash);
             }
             else
             {
@@ -84,50 +90,29 @@ namespace IdentityService.BAL
                 model.LastName = modelDTO.LastName;
                 model.Email = modelDTO.Email;
                 model.PhoneNumber = modelDTO.PhoneNumber;
-                model.PasswordHash2 = modelDTO.PasswordHash2;
+                model.UpdatedBy = this.Request.userID;
 
                 model.IsActive = modelDTO.IsActive;
                 model.IsDeleted = modelDTO.IsDeleted;
                 model.UpdatedDate = modelDTO.UpdatedDate;
 
-                //check for existing user with the same user id
-                var existingUsers = await this._dbContext.Users.Where(s => s.UserName == model.UserName).ToListAsync();
-                if (existingUsers.Count() <= 1) // 0 or 1
-                {
-                    isUserExists = false;
-                    result = await this.userManager.UpdateAsync(model);
-                }
+                result = await this.userManager.UpdateAsync(model);
             }
 
-            if (isUserExists)
+            if (result.Succeeded)
             {
-                this.IsSuccess = false;
-                List<ErrorMessageDTO> errors = new List<ErrorMessageDTO>() {
-                    new ErrorMessageDTO(){ Message= "User already exists" }
-                };
-                this.ErrorMessages = errors;
-                this.userManager.Dispose();
-                return null;
+                model = await this.userManager.FindByIdAsync(model.Id);
+                modelDTO = Mapper.Map<ApplicationUser, ApplicationUserDTO>(model);
+                return modelDTO;
             }
             else
             {
-                if (result.Succeeded)
-                {
-                    model = await this.userManager.FindByIdAsync(model.Id);
-                    modelDTO = Mapper.Map<ApplicationUser, ApplicationUserDTO>(model);
-                    this.userManager.Dispose();
-                    return modelDTO;
-                }
-                else
-                {
-                    this.IsSuccess = false;
-                    List<ErrorMessageDTO> errors = new List<ErrorMessageDTO>();
-                    foreach (var item in result.Errors)
-                        errors.Add(new ErrorMessageDTO() { Message = item.Description, Code = item.Code });
-                    this.ErrorMessages = errors;
-                    this.userManager.Dispose();
-                    return null;
-                }
+                this.IsSuccess = false;
+                List<ErrorMessageDTO> errors = new List<ErrorMessageDTO>();
+                foreach (var item in result.Errors)
+                    errors.Add(new ErrorMessageDTO() { Message = item.Description, Code = item.Code });
+                this.ErrorMessages = errors;
+                return null;
             }
         }
     }

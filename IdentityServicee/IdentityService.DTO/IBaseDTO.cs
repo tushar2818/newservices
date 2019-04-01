@@ -4,5 +4,6 @@
     {
         string applicationId { get; set; }
         string applicationToken { get; set; }
+        string userID { get; set; }
     }
 }
