@@ -1,13 +1,14 @@
 ﻿using SocietyApi.DTO;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SocietyApi.BAL
 {
     public interface IDesignationMasterRepository : IBaseRepository
     {
-        Task<object> GetAllAsync();
-        Task<object> SaveUpdateAsync(DesignationMasterDTO modelDTO);
-        Task<object> GetByIdAsync(long Id);
-        Task<object> DeleteAsync(long Id);
+        Task<IList<DesignationMasterDTO>> GetAllAsync();
+        Task<DesignationMasterDTO> SaveUpdateAsync(DesignationMasterDTO modelDTO);
+        Task<DesignationMasterDTO> GetByIdAsync(long Id);
+        Task<DesignationMasterDTO> DeleteAsync(long Id);
     }
 }

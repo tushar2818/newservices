@@ -17,23 +17,9 @@ namespace IdentityService.BAL
             RoleManager<ApplicationRole> roleManager) : base(applicationContext)
         {
             this.roleManager = roleManager;
-        }
+        } 
 
-        public async Task<object> CreateDatabaseAsync()
-        {
-            try
-            {
-                var status = await this._dbContext.Database.EnsureCreatedAsync();
-                return true;
-            }
-            catch (Exception)
-            {
-            }
-            return false;
-        }
-
-
-        public async Task<object> Delete(string Id)
+        public async Task<object> DeleteAsync(string Id)
         {
             var model = await this.roleManager.FindByIdAsync(Id);
             IdentityResult result = await this.roleManager.DeleteAsync(model);
@@ -54,7 +40,7 @@ namespace IdentityService.BAL
             }
         }
 
-        public async Task<object> GetAll()
+        public async Task<object> GetAllAsync()
         {
             var result = await this.roleManager.Roles.ToListAsync();
             IEnumerable<ApplicationRoleDTO> modelListDTO =
@@ -62,22 +48,22 @@ namespace IdentityService.BAL
             return modelListDTO;
         }
 
-        public async Task<object> GetById(string Id)
+        public async Task<object> GetByIdAsync(string Id)
         {
             var model = await this.roleManager.FindByIdAsync(Id);
             ApplicationRoleDTO modelDTO = Mapper.Map<ApplicationRole, ApplicationRoleDTO>(model);
             return modelDTO;
         }
 
-        public async Task<object> SaveUpdate(ApplicationRoleDTO modelDTO)
+        public async Task<object> SaveUpdateAsync(ApplicationRoleDTO modelDTO)
         {
             IdentityResult result;
             ApplicationRole model;
             if (string.IsNullOrEmpty(modelDTO.Id))
             {
                 model = new ApplicationRole() {
-                    Name = modelDTO.Name,
-                    Priority =modelDTO.Priority,
+                    Name = modelDTO.Name ,
+                    Priority = modelDTO.Priority,
                     CreatedDate = Converters.GetCurrentEpochTime(),
                     UpdatedDate = Converters.GetCurrentEpochTime(),
                     IsActive = true,

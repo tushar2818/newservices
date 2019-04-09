@@ -27,6 +27,37 @@ namespace SocietyApi.Controllers
         }
 
         /// <summary>
+        /// Create Database
+        /// </summary>
+        /// <returns>Status</returns>
+        [HttpGet]
+        [Route("api/floormaster/createdatabase")]
+        public async Task<object> CreateDatabase()
+        {
+            try
+            {
+                if (this._request.UserID == "Ini1234*")
+                {
+                    var data = await repository.CreateDatabaseAsync();
+                    _response.IsSuccess = true;
+                    _response.DisplayMessage = repository.DisplayMessage;
+                    _response.Result = data;
+                }
+                else
+                {
+                    _response.IsSuccess = false;
+                    _response.ErrorMessages = new List<ErrorMessageDTO>() { new ErrorMessageDTO() { Message = "Wrong user id" } };
+                }
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<ErrorMessageDTO>() { new ErrorMessageDTO() { Message = ex.ToString() } };
+            }
+            return _response;
+        }
+
+        /// <summary>
         /// Returns all floor masters
         /// </summary>
         /// <returns>All floor masters</returns>

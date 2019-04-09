@@ -12,9 +12,11 @@ namespace SocietyApi.DATA
         [Key]
         public Int64 CommonTableTypeID { get; set; }
 
-        public Int64 CommonTableTypeKey { get; set; }
+        [Required]
+        public string CommonTableTypeKey { get; set; }
 
-        public Int64 CommonTableTypeValue { get; set; }
+        [Required]
+        public string CommonTableTypeValue { get; set; }
 
         [Required]
         public bool IsActive { get; set; }

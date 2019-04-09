@@ -22,7 +22,7 @@ namespace IdentityService.DTO
         //     A random value that should change whenever a role is persisted to the store
         public virtual string ConcurrencyStamp { get; set; }
 
-        public Int16 Priority { get; set; }
+        public Int64 Priority { get; set; }
 
     }
 }

@@ -68,6 +68,7 @@ namespace IdentityService.DTO
         public virtual int AccessFailedCount { get; set; }
 
 
+        public string RoleName { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }

@@ -32,7 +32,55 @@ namespace IdentityService.BAL
             this.roleRepository = roleRepository;
         }
 
-        public async Task<object> ValidateUser(UserCredentialDTO userCredentialDTO)
+        public async Task<object> CreateDatabaseAsync()
+        {
+            //create database
+            var status = await this._dbContext.Database.EnsureCreatedAsync();
+
+            //add default role
+            var rolesTobeAdded = new string[] { "Super Admin", "Admin", "Client" };
+            for (int i = 0; i < rolesTobeAdded.Length; i++)
+            {
+                await this.roleRepository.SaveUpdateAsync(new ApplicationRoleDTO()
+                {
+                    Name = rolesTobeAdded[i] 
+                });
+            }
+
+            //add default user
+            await this.userRepository.SaveUpdateAsync(new ApplicationUserDTO()
+            {
+                Email="tusharsjagdale@gmail.com",
+                FirstName="Tushar",
+                LastName="Jagdale",
+                MiddleName="Shridhar",
+                PasswordHash="Ini1234*",
+                UserName= "tusharsjagdale@gmail.com",
+            });
+            await this.userRepository.SaveUpdateAsync(new ApplicationUserDTO()
+            {
+                Email = "pardeshiami333@gmail.com",
+                FirstName = "Amit",
+                LastName = "Pardeshi",
+                MiddleName = "",
+                PasswordHash = "Ini1234*",
+                UserName = "pardeshiami333@gmail.com",
+            });
+
+            //add users in role
+            var adminRoleId = await this.roleManager.FindByNameAsync(rolesTobeAdded[0]);
+            var tusharId = await this.userManager.FindByNameAsync("tusharsjagdale@gmail.com");
+            var amitId = await this.userManager.FindByNameAsync("pardeshiami333@gmail.com");
+            await this.AddUsersInRoleAsync(new UsersInRoleDTO()
+            {
+                RoleName = adminRoleId.Name,
+                UsersId = new string[] { tusharId.Id, amitId.Id }
+            });
+            this.DisplayMessage = "Database created successfully.";
+            return status;
+        }
+
+        public async Task<object> ValidateUserAsync(UserCredentialDTO userCredentialDTO)
         {
             // get the user to verifty
             var userToVerify = await this.userManager.FindByNameAsync(userCredentialDTO.Username);
@@ -69,40 +117,33 @@ namespace IdentityService.BAL
             return null;
         }
 
-        public async Task<object> AddUsersInRole(UsersInRoleDTO usersInRoleDTO)
+        public async Task<object> AddUsersInRoleAsync(UsersInRoleDTO usersInRoleDTO)
         {
-            //get role details from id
-            var role = await this.roleManager.FindByIdAsync(usersInRoleDTO.RoleID);
-
-            //get all users that are in current role
-            var allUsers = await this.userManager.GetUsersInRoleAsync(role.Name);
-
-            //remove all this user from current role
-            foreach (var user in allUsers)
-            {
-                var result = await this.userManager.RemoveFromRoleAsync(user, role.Name);
-            }
-
-            //add all recived user in role
             foreach (var userId in usersInRoleDTO.UsersId)
             {
-                var model = await this.userManager.FindByIdAsync(userId);
-                var result = await this.userManager.AddToRoleAsync(model, role.Name);
+                if (!string.IsNullOrEmpty(userId))
+                {
+                    var model = await this.userManager.FindByIdAsync(userId);
+                    var result = await this.userManager.AddToRoleAsync(model, usersInRoleDTO.RoleName);
+                }
             }
             this.DisplayMessage = "Users role updated succesfully";
             return usersInRoleDTO;  
         }
 
-        public async Task<object> GetUsersInRole(string roleId)
+        public async Task<object> GetUsersInRoleAsync(string roleName)
         {
-            //get role details from id
-            var role = await this.roleManager.FindByIdAsync(roleId);
-
             //get all users that are in current role
-            var allUsers = await this.userManager.GetUsersInRoleAsync(role.Name);
+            var allUsers = await this.userManager.GetUsersInRoleAsync(roleName);
             var usersId = allUsers.Select(s => s.Id).ToList();
+            return new UsersInRoleDTO() { RoleName = roleName, UsersId = usersId };
+        }
 
-            return new UsersInRoleDTO() { RoleID = roleId, UsersId = usersId };
+        public async Task<object> GetUserRoleAsync(string userId)
+        {
+            var model = await this.userManager.FindByIdAsync(userId);
+            IList<string> roles = await this.userManager.GetRolesAsync(model);
+            return roles;
         }
 
     }

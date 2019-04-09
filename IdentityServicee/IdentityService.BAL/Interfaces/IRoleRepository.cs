@@ -8,11 +8,10 @@ namespace IdentityService.BAL
 {
     public interface IRoleRepository : IBaseRepository
     {
-        Task<object> CreateDatabaseAsync();
-        Task<object> GetAll();
-        Task<object> GetById(string Id);
-        Task<object> SaveUpdate(ApplicationRoleDTO modelDTO);
-        Task<object> Delete(string Id);
+        Task<object> GetAllAsync();
+        Task<object> GetByIdAsync(string Id);
+        Task<object> SaveUpdateAsync(ApplicationRoleDTO modelDTO);
+        Task<object> DeleteAsync(string Id);
         RoleManager<ApplicationRole> roleManager { get; set; }
     }
 }

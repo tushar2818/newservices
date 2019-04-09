@@ -16,7 +16,7 @@ namespace SocietyApi.BAL
         {
         }
 
-        public async Task<object> DeleteAsync(long Id)
+        public async Task<FlatMasterDTO> DeleteAsync(long Id)
         {
             var model = await this._dbContext.FlatMaster.FindAsync(Id);
             model.IsDeleted = true;
@@ -28,21 +28,21 @@ namespace SocietyApi.BAL
             return modelDTO;
         }
 
-        public async Task<object> GetAllAsync()
+        public async Task<IList<FlatMasterDTO>> GetAllAsync()
         {
             var modelList = await this._dbContext.FlatMaster.Where(s => !s.IsDeleted && s.IsActive).ToListAsync();
-            var modelDTOList = Mapper.Map<IEnumerable<FlatMaster>, IEnumerable<FlatMasterDTO>>(modelList);
+            var modelDTOList = Mapper.Map<IList<FlatMaster>, IList<FlatMasterDTO>>(modelList);
             return modelDTOList;
         }
 
-        public async Task<object> GetByIdAsync(long Id)
+        public async Task<FlatMasterDTO> GetByIdAsync(long Id)
         {
             var model = await this._dbContext.FlatMaster.FindAsync(Id);
             var modelDTO = Mapper.Map<FlatMaster, FlatMasterDTO>(model);
             return modelDTO;
         }
 
-        public async Task<object> SaveUpdateAsync(FlatMasterDTO modelDTO)
+        public async Task<FlatMasterDTO> SaveUpdateAsync(FlatMasterDTO modelDTO)
         {
             modelDTO.UpdatedDate = Converters.GetCurrentEpochTime();
             var model = Mapper.Map<FlatMasterDTO, FlatMaster>(modelDTO);

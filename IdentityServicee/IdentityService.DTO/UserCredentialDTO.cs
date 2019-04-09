@@ -16,7 +16,7 @@ namespace IdentityService.DTO
 
     public class UsersInRoleDTO
     {
-        public virtual string RoleID { get; set; }
+        public virtual string RoleName { get; set; }
         public virtual IEnumerable<string> UsersId { get; set; }
     }
 

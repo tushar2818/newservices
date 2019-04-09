@@ -8,10 +8,11 @@ namespace IdentityService.BAL
 {
     public interface IIdentityRepository : IBaseRepository
     {
-        Task<object> ValidateUser(UserCredentialDTO userCredentialDTO);
-        Task<object> AddUsersInRole(UsersInRoleDTO usersInRoleDTO);
-        Task<object> GetUsersInRole(string roleId);
-
+        Task<object> CreateDatabaseAsync();
+        Task<object> ValidateUserAsync(UserCredentialDTO userCredentialDTO);
+        Task<object> AddUsersInRoleAsync(UsersInRoleDTO usersInRoleDTO);
+        Task<object> GetUserRoleAsync(string userId);
+        Task<object> GetUsersInRoleAsync(string roleId);
 
         UserManager<ApplicationUser> userManager { get; set; }
         RoleManager<ApplicationRole> roleManager { get; set; }

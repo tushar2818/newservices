@@ -1,13 +1,15 @@
 ﻿using SocietyApi.DTO;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SocietyApi.BAL
 {
     public interface IFloorMasterRepository : IBaseRepository
     {
-        Task<object> GetAllAsync();
-        Task<object> SaveUpdateAsync(FloorMasterDTO modelDTO);
-        Task<object> GetByIdAsync(long Id);
-        Task<object> DeleteAsync(long Id);
+        Task<object> CreateDatabaseAsync();
+        Task<IList<FloorMasterDTO>> GetAllAsync();
+        Task<FloorMasterDTO> SaveUpdateAsync(FloorMasterDTO modelDTO);
+        Task<FloorMasterDTO> GetByIdAsync(long Id);
+        Task<FloorMasterDTO> DeleteAsync(long Id);
     }
 }

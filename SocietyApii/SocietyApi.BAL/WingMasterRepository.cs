@@ -16,7 +16,7 @@ namespace SocietyApi.BAL
         {
         }
 
-        public async Task<object> DeleteAsync(long Id)
+        public async Task<WingMasterDTO> DeleteAsync(long Id)
         {
             var model = await this._dbContext.WingMaster.FindAsync(Id);
             model.IsDeleted = true;
@@ -28,21 +28,21 @@ namespace SocietyApi.BAL
             return modelDTO;
         }
 
-        public async Task<object> GetAllAsync()
+        public async Task<IList<WingMasterDTO>> GetAllAsync()
         {
             var modelList = await this._dbContext.WingMaster.Where(s => !s.IsDeleted && s.IsActive).ToListAsync();
-            var modelDTOList = Mapper.Map<IEnumerable<WingMaster>, IEnumerable<WingMasterDTO>>(modelList);
+            var modelDTOList = Mapper.Map<IList<WingMaster>, IList<WingMasterDTO>>(modelList);
             return modelDTOList;
         }
 
-        public async Task<object> GetByIdAsync(long Id)
+        public async Task<WingMasterDTO> GetByIdAsync(long Id)
         {
             var model = await this._dbContext.WingMaster.FindAsync(Id);
             var modelDTO = Mapper.Map<WingMaster, WingMasterDTO>(model);
             return modelDTO;
         }
 
-        public async Task<object> SaveUpdateAsync(WingMasterDTO modelDTO)
+        public async Task<WingMasterDTO> SaveUpdateAsync(WingMasterDTO modelDTO)
         {
             modelDTO.UpdatedDate = Converters.GetCurrentEpochTime();
             var model = Mapper.Map<WingMasterDTO, WingMaster>(modelDTO);

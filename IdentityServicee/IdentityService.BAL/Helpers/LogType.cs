@@ -2,6 +2,7 @@
 {
     public enum LogType
     {
-        Role
+        Role,
+        User
     }
 }

@@ -34,6 +34,37 @@ namespace IdentityService.Controllers
         }
 
         /// <summary>
+        /// Create Database
+        /// </summary>
+        /// <returns>Status</returns>
+        [HttpGet]
+        [Route("api/identity/createdatabase")]
+        public async Task<object> CreateDatabase()
+        {
+            try
+            {
+                if (this._request.userID == "Ini1234*")
+                {
+                    var data = await _repository.CreateDatabaseAsync();
+                    _response.IsSuccess = true;
+                    _response.DisplayMessage = _repository.DisplayMessage;
+                    _response.Result = data;
+                }
+                else
+                {
+                    _response.IsSuccess = false;
+                    _response.ErrorMessages = new List<ErrorMessageDTO>() { new ErrorMessageDTO() { Message = "Wrong user id" } };
+                }
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<ErrorMessageDTO>() { new ErrorMessageDTO() { Message = ex.ToString() } };
+            }
+            return _response;
+        }
+
+        /// <summary>
         /// Validate user credentials
         /// </summary>
         /// <param name="model">user credentials</param>
@@ -44,7 +75,7 @@ namespace IdentityService.Controllers
         {
             try
             {
-                var data = await _repository.ValidateUser(model);
+                var data = await _repository.ValidateUserAsync(model);
                 _response.Result = data;
                 _response.IsSuccess = _repository.IsSuccess;
                 _response.ErrorMessages = _repository.ErrorMessages;
@@ -69,7 +100,7 @@ namespace IdentityService.Controllers
         {
             try
             {
-                var data = await _repository.AddUsersInRole(model);
+                var data = await _repository.AddUsersInRoleAsync(model);
                 _response.Result = data;
                 _response.IsSuccess = _repository.IsSuccess;
                 _response.ErrorMessages = _repository.ErrorMessages;
@@ -94,7 +125,29 @@ namespace IdentityService.Controllers
         {
             try
             {
-                var data = await _repository.GetUsersInRole(roleid);
+                var data = await _repository.GetUsersInRoleAsync(roleid);
+                _response.Result = data;
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<ErrorMessageDTO>() { new ErrorMessageDTO() { Message = ex.ToString() } };
+            }
+            return _response;
+        }
+
+        /// <summary>
+        /// return user role
+        /// </summary>
+        /// <param name="userid">user id</param>
+        /// <returns>user role</returns>
+        [HttpGet]
+        [Route("api/identity/getuserrole/{roleid}")]
+        public async Task<object> GetUserRole(string userid)
+        {
+            try
+            {
+                var data = await _repository.GetUserRoleAsync(userid);
                 _response.Result = data;
             }
             catch (Exception ex)

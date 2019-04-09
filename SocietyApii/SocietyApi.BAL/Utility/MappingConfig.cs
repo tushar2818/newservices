@@ -11,15 +11,20 @@ namespace SocietyApi.BAL
             AutoMapper.Mapper.Initialize(config =>
             {
                 config.CreateMissingTypeMaps = true;
-                //config.CreateMap<CompanyMaster, CompanyMasterDTO>();
-                //config.CreateMap<DesignationMaster, DesignationMasterDTO>();
-                //config.CreateMap<EmployeeMaster, EmployeeMasterDTO>();
-                //config.CreateMap<FlatMaster, FlatMasterDTO>();
-                //config.CreateMap<FlatTypeMaster, FlatTypeMasterDTO>();
-                //config.CreateMap<FloorMaster, FloorMasterDTO>();
-                //config.CreateMap<ProjectEmployee, ProjectEmployeeDTO>();
-                //config.CreateMap<ProjectMaster, ProjectMasterDTO>();
-                //config.CreateMap<WingMaster, WingMasterDTO>();
+                config.CreateMap<BuildingMaster, BuildingMasterDTO>();
+                config.CreateMap<ClientMaster, ClientMasterDTO>();
+                config.CreateMap<CommonDesignation, CommonDesignationDTO>();
+                config.CreateMap<CommonTableType, CommonTableTypeDTO>();
+                config.CreateMap<CompanyMaster, CompanyMasterDTO>();
+                config.CreateMap<DesignationMaster, DesignationMasterDTO>();
+                config.CreateMap<DesignationType, DesignationTypeDTO>();
+                config.CreateMap<DesignationTypeMapping, DesignationTypeMappingDTO>();
+                config.CreateMap<FloorMaster, FloorMasterDTO>();
+                config.CreateMap<FlatTypeMaster, FlatTypeMasterDTO>();
+                config.CreateMap<FloorMaster, FloorMasterDTO>();
+                config.CreateMap<PersonMaster, PersonMasterDTO>();
+                config.CreateMap<ProjectMaster, ProjectMasterDTO>();
+                config.CreateMap<WingMaster, WingMasterDTO>();
             });
         }
     }

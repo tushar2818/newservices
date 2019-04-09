@@ -8,10 +8,10 @@ using SocietyApi.DTO;
 
 namespace SocietyApi.Controllers
 {
-    public class SocietyMasterController : BaseController
+    public class DesignationTypeController : BaseController
     {
-        private ISocietyMasterRepository repository;
-        public SocietyMasterController(ISocietyMasterRepository repository)
+        private IDesignationTypeRepository repository;
+        public DesignationTypeController(IDesignationTypeRepository repository)
         {
             this.repository = repository;
         }
@@ -27,11 +27,11 @@ namespace SocietyApi.Controllers
         }
 
         /// <summary>
-        /// Returns all society masters
+        /// Returns all designation types
         /// </summary>
-        /// <returns>All society masters</returns>
+        /// <returns>All designation types</returns>
         [HttpGet]
-        [Route("api/societymaster/getall")]
+        [Route("api/designationtype/getall")]
         public async Task<object> GetAll()
         {
             try
@@ -48,12 +48,12 @@ namespace SocietyApi.Controllers
         }
 
         /// <summary>
-        /// Get society master details from society master id
+        /// Get designation type details from designation type id
         /// </summary>
-        /// <param name="id">society master Id</param>
-        /// <returns>society master details</returns>
+        /// <param name="id">designation type Id</param>
+        /// <returns>designation type Details</returns>
         [HttpGet]
-        [Route("api/societymaster/getbyid/{id}")]
+        [Route("api/designationtype/getbyid/{id}")]
         public async Task<object> GetById(long id)
         {
             try
@@ -70,13 +70,13 @@ namespace SocietyApi.Controllers
         }
 
         /// <summary>
-        /// Save/Update society master details
+        /// Save/Update designation type details
         /// </summary>
-        /// <param name="model">society master details</param>
-        /// <returns>Added/Updated society master details</returns>
+        /// <param name="model">designation type details</param>
+        /// <returns>Added/Updated designation type details</returns>
         [HttpPost]
-        [Route("api/societymaster/saveupdate")]
-        public async Task<object> Post([FromBody]SocietyMasterDTO model)
+        [Route("api/designationtype/saveupdate")]
+        public async Task<object> Post([FromBody]DesignationTypeDTO model)
         {
             try
             {
@@ -95,12 +95,12 @@ namespace SocietyApi.Controllers
         }
 
         /// <summary>
-        /// Method used to delete society master
+        /// Method used to delete designation type
         /// </summary>
-        /// <param name="id">society master Id</param>
-        /// <returns>Deleted society master details</returns>
+        /// <param name="id">designation type Id</param>
+        /// <returns>Deleted designation type details</returns>
         [HttpDelete]
-        [Route("api/societymaster/{id}")]
+        [Route("api/designationtype/{id}")]
         public async Task<object> Delete(long id)
         {
             try
