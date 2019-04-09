@@ -8,10 +8,10 @@ namespace IdentityService.BAL
 {
     public interface IUserRepository : IBaseRepository
     {
-        Task<object> GetAll();
-        Task<object> GetById(string Id);
-        Task<object> SaveUpdate(ApplicationUserDTO modelDTO);
-        Task<object> Delete(string Id);
+        Task<object> GetAllAsync();
+        Task<object> GetByIdAsync(string Id);
+        Task<object> SaveUpdateAsync(ApplicationUserDTO modelDTO);
+        Task<object> DeleteAsync(string Id);
         UserManager<ApplicationUser> userManager { get; set; }
     }
 }

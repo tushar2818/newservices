@@ -8,10 +8,10 @@ using SocietyApi.DTO;
 
 namespace SocietyApi.Controllers
 {
-    public class FlatOwnerHistoryController : BaseController
+    public class ClientMasterController : BaseController
     {
-        private IFlatOwnerHistoryRepository repository;
-        public FlatOwnerHistoryController(IFlatOwnerHistoryRepository repository)
+        private IClientMasterRepository repository;
+        public ClientMasterController(IClientMasterRepository repository)
         {
             this.repository = repository;
         }
@@ -27,11 +27,11 @@ namespace SocietyApi.Controllers
         }
 
         /// <summary>
-        /// Returns all flat owner historys
+        /// Returns all client master
         /// </summary>
-        /// <returns>All flat owner historys</returns>
+        /// <returns>All client masters</returns>
         [HttpGet]
-        [Route("api/flatownerhistory/getall")]
+        [Route("api/clientmaster/getall")]
         public async Task<object> GetAll()
         {
             try
@@ -48,12 +48,12 @@ namespace SocietyApi.Controllers
         }
 
         /// <summary>
-        /// Get flat owner history details from flat owner history id
+        /// Get client master details from client master id
         /// </summary>
-        /// <param name="id">flat owner history Id</param>
-        /// <returns>flat owner history details</returns>
+        /// <param name="id">client master Id</param>
+        /// <returns>client master Details</returns>
         [HttpGet]
-        [Route("api/flatownerhistory/getbyid/{id}")]
+        [Route("api/clientmaster/getbyid/{id}")]
         public async Task<object> GetById(long id)
         {
             try
@@ -70,13 +70,13 @@ namespace SocietyApi.Controllers
         }
 
         /// <summary>
-        /// Save/Update flat owner history details
+        /// Save/Update client master details
         /// </summary>
-        /// <param name="model">flat owner history details</param>
-        /// <returns>Added/Updated flat owner history details</returns>
+        /// <param name="model">client master details</param>
+        /// <returns>Added/Updated client master details</returns>
         [HttpPost]
-        [Route("api/flatownerhistory/saveupdate")]
-        public async Task<object> Post([FromBody]FlatOwnerHistoryDTO model)
+        [Route("api/clientmaster/saveupdate")]
+        public async Task<object> Post([FromBody]ClientMasterDTO model)
         {
             try
             {
@@ -95,12 +95,12 @@ namespace SocietyApi.Controllers
         }
 
         /// <summary>
-        /// Method used to delete flat owner history
+        /// Method used to delete client master
         /// </summary>
-        /// <param name="id">flat owner history Id</param>
-        /// <returns>Deleted flat owner history details</returns>
+        /// <param name="id">client master Id</param>
+        /// <returns>Deleted client master details</returns>
         [HttpDelete]
-        [Route("api/flatownerhistory/{id}")]
+        [Route("api/clientmaster/{id}")]
         public async Task<object> Delete(long id)
         {
             try

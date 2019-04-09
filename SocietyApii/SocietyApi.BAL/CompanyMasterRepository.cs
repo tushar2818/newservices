@@ -16,7 +16,7 @@ namespace SocietyApi.BAL
         {
         }
 
-        public async Task<object> DeleteAsync(long Id)
+        public async Task<CompanyMasterDTO> DeleteAsync(long Id)
         {
             var model = await this._dbContext.CompanyMaster.FindAsync(Id);
             model.IsDeleted = true;
@@ -28,21 +28,21 @@ namespace SocietyApi.BAL
             return modelDTO;
         }
 
-        public async Task<object> GetAllAsync()
+        public async Task<IList<CompanyMasterDTO>> GetAllAsync()
         {
             var modelList = await this._dbContext.CompanyMaster.Where(s => !s.IsDeleted && s.IsActive).ToListAsync();
-            var modelDTOList = Mapper.Map<IEnumerable<CompanyMaster>, IEnumerable<CompanyMasterDTO>>(modelList);
+            var modelDTOList = Mapper.Map<IList<CompanyMaster>, IList<CompanyMasterDTO>>(modelList);
             return modelDTOList;
         }
 
-        public async Task<object> GetByIdAsync(long Id)
+        public async Task<CompanyMasterDTO> GetByIdAsync(long Id)
         {
             var model = await this._dbContext.CompanyMaster.FindAsync(Id);
             var modelDTO = Mapper.Map<CompanyMaster, CompanyMasterDTO>(model);
             return modelDTO;
         }
 
-        public async Task<object> SaveUpdateAsync(CompanyMasterDTO modelDTO)
+        public async Task<CompanyMasterDTO> SaveUpdateAsync(CompanyMasterDTO modelDTO)
         {
             modelDTO.UpdatedDate = Converters.GetCurrentEpochTime();
             var model = Mapper.Map<CompanyMasterDTO, CompanyMaster>(modelDTO);

@@ -16,7 +16,7 @@ namespace SocietyApi.BAL
         {
         }
 
-        public async Task<object> DeleteAsync(long Id)
+        public async Task<ProjectMasterDTO> DeleteAsync(long Id)
         {
             var model = await this._dbContext.ProjectMaster.FindAsync(Id);
             model.IsDeleted = true;
@@ -28,21 +28,21 @@ namespace SocietyApi.BAL
             return modelDTO;
         }
 
-        public async Task<object> GetAllAsync()
+        public async Task<IList<ProjectMasterDTO>> GetAllAsync()
         {
             var modelList = await this._dbContext.ProjectMaster.Where(s => !s.IsDeleted && s.IsActive).ToListAsync();
-            var modelDTOList = Mapper.Map<IEnumerable<ProjectMaster>, IEnumerable<ProjectMasterDTO>>(modelList);
+            var modelDTOList = Mapper.Map<IList<ProjectMaster>, IList<ProjectMasterDTO>>(modelList);
             return modelDTOList;
         }
 
-        public async Task<object> GetByIdAsync(long Id)
+        public async Task<ProjectMasterDTO> GetByIdAsync(long Id)
         {
             var model = await this._dbContext.ProjectMaster.FindAsync(Id);
             var modelDTO = Mapper.Map<ProjectMaster, ProjectMasterDTO>(model);
             return modelDTO;
         }
 
-        public async Task<object> SaveUpdateAsync(ProjectMasterDTO modelDTO)
+        public async Task<ProjectMasterDTO> SaveUpdateAsync(ProjectMasterDTO modelDTO)
         {
             modelDTO.UpdatedDate = Converters.GetCurrentEpochTime();
             var model = Mapper.Map<ProjectMasterDTO, ProjectMaster>(modelDTO);

@@ -11,7 +11,7 @@ namespace IdentityService.DATA
     public class ApplicationRole : IdentityRole
     {
         [Required]
-        public Int16 Priority { get; set; }
+        public Int64 Priority { get; set; }
 
         [Required]
         public bool IsActive { get; set; }

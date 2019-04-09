@@ -39,7 +39,7 @@ namespace IdentityService.Controllers
         {
             try
             {
-                var data = await _repository.GetAll();
+                var data = await _repository.GetAllAsync();
                 _response.Result = data;
             }
             catch (Exception ex)
@@ -61,7 +61,7 @@ namespace IdentityService.Controllers
         {
             try
             {
-                var data = await _repository.GetById(id);
+                var data = await _repository.GetByIdAsync(id);
                 _response.Result = data;
             }
             catch (Exception ex)
@@ -83,7 +83,7 @@ namespace IdentityService.Controllers
         {
             try
             {
-                var data = await _repository.SaveUpdate(model);
+                var data = await _repository.SaveUpdateAsync(model);
                 _response.Result = data;
                 _response.IsSuccess = _repository.IsSuccess;
                 _response.ErrorMessages = _repository.ErrorMessages;
@@ -108,7 +108,7 @@ namespace IdentityService.Controllers
         {
             try
             {
-                var data = await _repository.Delete(id);
+                var data = await _repository.DeleteAsync(id);
                 _response.Result = data;
                 _response.IsSuccess = _repository.IsSuccess;
                 _response.ErrorMessages = _repository.ErrorMessages;

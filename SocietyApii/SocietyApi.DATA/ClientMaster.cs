@@ -23,7 +23,10 @@ namespace SocietyApi.DATA
         public string Email { get; set; }
 
         [Required]
-        public string Mobile { get; set; }
+        public string Mobile { get; set; }        
+
+        [Required]
+        public Int64 VallidFrom { get; set; }
 
         [Required]
         public Int64 VallidTill { get; set; }

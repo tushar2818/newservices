@@ -8,10 +8,10 @@ using SocietyApi.DTO;
 
 namespace SocietyApi.Controllers
 {
-    public class ProjectEmployeeController : BaseController
+    public class CommonDesignationController : BaseController
     {
-        private IProjectEmployeeRepository repository;
-        public ProjectEmployeeController(IProjectEmployeeRepository repository)
+        private ICommonDesignationRepository repository;
+        public CommonDesignationController(ICommonDesignationRepository repository)
         {
             this.repository = repository;
         }
@@ -27,11 +27,11 @@ namespace SocietyApi.Controllers
         }
 
         /// <summary>
-        /// Returns all project employees
+        /// Returns all common designations
         /// </summary>
-        /// <returns>All project employees</returns>
+        /// <returns>All common designations</returns>
         [HttpGet]
-        [Route("api/projectemployee/getall")]
+        [Route("api/commondesignation/getall")]
         public async Task<object> GetAll()
         {
             try
@@ -48,12 +48,12 @@ namespace SocietyApi.Controllers
         }
 
         /// <summary>
-        /// Get project employee details from project employee id
+        /// Get common designation details from common designation id
         /// </summary>
-        /// <param name="id">project employee Id</param>
-        /// <returns>project employee details</returns>
+        /// <param name="id">common designation Id</param>
+        /// <returns>common designation Details</returns>
         [HttpGet]
-        [Route("api/projectemployee/getbyid/{id}")]
+        [Route("api/commondesignation/getbyid/{id}")]
         public async Task<object> GetById(long id)
         {
             try
@@ -70,13 +70,13 @@ namespace SocietyApi.Controllers
         }
 
         /// <summary>
-        /// Save/Update project employee details
+        /// Save/Update common designation details
         /// </summary>
-        /// <param name="model">project employee details</param>
-        /// <returns>Added/Updated project employee details</returns>
+        /// <param name="model">common designation details</param>
+        /// <returns>Added/Updated common designation details</returns>
         [HttpPost]
-        [Route("api/projectemployee/saveupdate")]
-        public async Task<object> Post([FromBody]ProjectEmployeeDTO model)
+        [Route("api/commondesignation/saveupdate")]
+        public async Task<object> Post([FromBody]CommonDesignationDTO model)
         {
             try
             {
@@ -95,12 +95,12 @@ namespace SocietyApi.Controllers
         }
 
         /// <summary>
-        /// Method used to delete project employee
+        /// Method used to delete common designation
         /// </summary>
-        /// <param name="id">project employee Id</param>
-        /// <returns>Deleted project employee details</returns>
+        /// <param name="id">common designation Id</param>
+        /// <returns>Deleted common designation details</returns>
         [HttpDelete]
-        [Route("api/projectemployee/{id}")]
+        [Route("api/commondesignation/{id}")]
         public async Task<object> Delete(long id)
         {
             try

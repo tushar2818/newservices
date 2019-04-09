@@ -8,10 +8,10 @@ using SocietyApi.DTO;
 
 namespace SocietyApi.Controllers
 {
-    public class EmployeeMasterController : BaseController
+    public class CommonTableTypeController : BaseController
     {
-        private IEmployeeMasterRepository repository;
-        public EmployeeMasterController(IEmployeeMasterRepository repository)
+        private ICommonTableTypeRepository repository;
+        public CommonTableTypeController(ICommonTableTypeRepository repository)
         {
             this.repository = repository;
         }
@@ -27,11 +27,11 @@ namespace SocietyApi.Controllers
         }
 
         /// <summary>
-        /// Returns all employee masters 
+        /// Returns all common table types
         /// </summary>
-        /// <returns>All employee masters</returns>
+        /// <returns>All common table types</returns>
         [HttpGet]
-        [Route("api/employeemaster/getall")]
+        [Route("api/commontabletype/getall")]
         public async Task<object> GetAll()
         {
             try
@@ -48,12 +48,12 @@ namespace SocietyApi.Controllers
         }
 
         /// <summary>
-        /// Get employee master details from employee master id
+        /// Get common table type details from common table type id
         /// </summary>
-        /// <param name="id">employee master Id</param>
-        /// <returns>employee master details</returns>
+        /// <param name="id">common table type Id</param>
+        /// <returns>common table type Details</returns>
         [HttpGet]
-        [Route("api/employeemaster/getbyid/{id}")]
+        [Route("api/commontabletype/getbyid/{id}")]
         public async Task<object> GetById(long id)
         {
             try
@@ -70,13 +70,13 @@ namespace SocietyApi.Controllers
         }
 
         /// <summary>
-        /// Save/Update employee master details
+        /// Save/Update common table type details
         /// </summary>
-        /// <param name="model">employee master details</param>
-        /// <returns>Added/Updated employee master details</returns>
+        /// <param name="model">common table type details</param>
+        /// <returns>Added/Updated common table type details</returns>
         [HttpPost]
-        [Route("api/employeemaster/saveupdate")]
-        public async Task<object> Post([FromBody]EmployeeMasterDTO model)
+        [Route("api/commontabletype/saveupdate")]
+        public async Task<object> Post([FromBody]CommonTableTypeDTO model)
         {
             try
             {
@@ -95,12 +95,12 @@ namespace SocietyApi.Controllers
         }
 
         /// <summary>
-        /// Method used to delete employee master
+        /// Method used to delete common table type
         /// </summary>
-        /// <param name="id">employee master Id</param>
-        /// <returns>Deleted employee master details</returns>
+        /// <param name="id">common table type Id</param>
+        /// <returns>Deleted common table type details</returns>
         [HttpDelete]
-        [Route("api/employeemaster/{id}")]
+        [Route("api/commontabletype/{id}")]
         public async Task<object> Delete(long id)
         {
             try

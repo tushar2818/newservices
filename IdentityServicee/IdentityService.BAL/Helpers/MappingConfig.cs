@@ -1,4 +1,7 @@
 ﻿
+using IdentityService.DATA;
+using IdentityService.DTO;
+
 namespace IdentityService.BAL
 {
     public static class MappingConfig
@@ -8,7 +11,10 @@ namespace IdentityService.BAL
             AutoMapper.Mapper.Initialize(config =>
             {
                 config.CreateMissingTypeMaps = true;
-                //config.CreateMap<Citys, CitysDTO>();
+                config.AllowNullCollections = true;
+                config.AllowNullDestinationValues = true;
+                config.CreateMap<ApplicationUser, ApplicationUserDTO>();
+                config.CreateMap<ApplicationRole, ApplicationRoleDTO>();
             });
         }
     }

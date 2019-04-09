@@ -33,13 +33,19 @@ namespace SocietyApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:DefaultConnection"]));
-            services.AddTransient(typeof(ICompanyMasterRepository), typeof(CompanyMasterRepository));
+            services.AddTransient(typeof(IClientMasterRepository), typeof(ClientMasterRepository));
+            services.AddTransient(typeof(ICommonDesignationRepository), typeof(CommonDesignationRepository));
+            services.AddTransient(typeof(ICommonTableTypeRepository), typeof(CommonTableTypeRepository));
+            services.AddTransient(typeof(IDesignationTypeRepository), typeof(DesignationTypeRepository));
+            services.AddTransient(typeof(IDesignationTypeMappingRepository), typeof(DesignationTypeMappingRepository));
+            services.AddTransient(typeof(IPersonMasterRepository), typeof(PersonMasterRepository));
             services.AddTransient(typeof(IDesignationMasterRepository), typeof(DesignationMasterRepository));
             services.AddTransient(typeof(IFlatMasterRepository), typeof(FlatMasterRepository));
             services.AddTransient(typeof(IFlatTypeMasterRepository), typeof(FlatTypeMasterRepository));
             services.AddTransient(typeof(IFloorMasterRepository), typeof(FloorMasterRepository));
             services.AddTransient(typeof(IProjectMasterRepository), typeof(ProjectMasterRepository));
             services.AddTransient(typeof(IWingMasterRepository), typeof(WingMasterRepository));
+            services.AddTransient(typeof(ILookupRepository), typeof(LookupRepository));
 
             services.AddMvc().AddJsonOptions(options =>
             {

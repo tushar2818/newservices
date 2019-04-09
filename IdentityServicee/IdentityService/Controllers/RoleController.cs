@@ -26,28 +26,7 @@ namespace IdentityService.Controllers
             _repository.roleManager.Dispose();
             _repository.Dispose();
             base.Dispose(disposing);
-        }
-
-        /// <summary>
-        /// Create Database
-        /// </summary>
-        /// <returns>Status</returns>
-        [HttpGet]
-        [Route("api/roles/createdatabase")]
-        public async Task<object> CreateDatabase()
-        {
-            try
-            {
-                var data = await _repository.CreateDatabaseAsync();
-                _response.Result = data;
-            }
-            catch (Exception ex)
-            {
-                _response.IsSuccess = false;
-                _response.ErrorMessages = new List<ErrorMessageDTO>() { new ErrorMessageDTO() { Message = ex.ToString() } };
-            }
-            return _response;
-        }
+        } 
 
         /// <summary>
         /// Returns all roles
@@ -59,7 +38,7 @@ namespace IdentityService.Controllers
         {
             try
             {
-                var data = await _repository.GetAll();
+                var data = await _repository.GetAllAsync();
                 _response.Result = data;
             }
             catch (Exception ex)
@@ -81,7 +60,7 @@ namespace IdentityService.Controllers
         {
             try
             {
-                var data = await _repository.GetById(id);
+                var data = await _repository.GetByIdAsync(id);
                 _response.Result = data;
             }
             catch (Exception ex)
@@ -103,7 +82,7 @@ namespace IdentityService.Controllers
         {
             try
             {
-                var data = await _repository.SaveUpdate(model);
+                var data = await _repository.SaveUpdateAsync(model);
                 _response.Result = data;
                 _response.IsSuccess = _repository.IsSuccess;
                 _response.ErrorMessages = _repository.ErrorMessages;
@@ -128,7 +107,7 @@ namespace IdentityService.Controllers
         {
             try
             {
-                var data = await _repository.Delete(id);
+                var data = await _repository.DeleteAsync(id);
                 _response.Result = data;
                 _response.IsSuccess = _repository.IsSuccess;
                 _response.ErrorMessages = _repository.ErrorMessages;

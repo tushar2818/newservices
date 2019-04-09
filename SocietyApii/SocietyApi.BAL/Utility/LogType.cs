@@ -12,6 +12,12 @@
         ProjectEmployee,
         ProjectMaster,
         SocietyMaster,
-        WingMaster
+        WingMaster,
+        ClientMaster,
+        CommonDesignation,
+        CommonTableType,
+        DesignationType,
+        PersonMaster,
+        DesignationTypeMapping
     }
 }
