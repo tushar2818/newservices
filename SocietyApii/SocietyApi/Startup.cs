@@ -46,6 +46,8 @@ namespace SocietyApi
             services.AddTransient(typeof(IProjectMasterRepository), typeof(ProjectMasterRepository));
             services.AddTransient(typeof(IWingMasterRepository), typeof(WingMasterRepository));
             services.AddTransient(typeof(ILookupRepository), typeof(LookupRepository));
+            services.AddTransient(typeof(ICompanyMasterRepository), typeof(CompanyMasterRepository));
+            services.AddTransient(typeof(IBuildingMasterRepository), typeof(BuildingMasterRepository));
 
             services.AddMvc().AddJsonOptions(options =>
             {

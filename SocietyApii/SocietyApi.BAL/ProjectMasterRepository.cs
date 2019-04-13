@@ -44,6 +44,7 @@ namespace SocietyApi.BAL
 
         public async Task<ProjectMasterDTO> SaveUpdateAsync(ProjectMasterDTO modelDTO)
         {
+            modelDTO.CompanyMasterID = this.Request.CompanyID;
             modelDTO.UpdatedDate = Converters.GetCurrentEpochTime();
             var model = Mapper.Map<ProjectMasterDTO, ProjectMaster>(modelDTO);
             if (model.ProjectMasterID == 0)

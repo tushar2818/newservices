@@ -8,51 +8,51 @@ using System.Threading.Tasks;
 
 namespace SocietyApi.BAL
 {
-    public class CompanyMasterRepository : BaseRepository, ICompanyMasterRepository
+    public class BuildingMasterRepository : BaseRepository, IBuildingMasterRepository
     {
         LogType logType = LogType.CompanyMaster;
-        public CompanyMasterRepository(ApplicationContext applicationContext) : 
+        public BuildingMasterRepository(ApplicationContext applicationContext) : 
             base(applicationContext)
         {
         }
 
-        public async Task<CompanyMasterDTO> DeleteAsync(long Id)
+        public async Task<BuildingMasterDTO> DeleteAsync(long Id)
         {
-            var model = await this._dbContext.CompanyMaster.FindAsync(Id);
+            var model = await this._dbContext.BuildingMaster.FindAsync(Id);
             model.IsDeleted = true;
             model.UpdatedDate = Converters.GetCurrentEpochTime();
             this._dbContext.Entry(model).State = EntityState.Modified;
             await this._dbContext.SaveChangesAsync();
-            var modelDTO = Mapper.Map<CompanyMaster, CompanyMasterDTO>(model);
+            var modelDTO = Mapper.Map<BuildingMaster, BuildingMasterDTO>(model);
             this.DisplayMessage = CommonMethods.GetMessage(this.logType, LogAction.Delete);
             return modelDTO;
         }
 
-        public async Task<IList<CompanyMasterDTO>> GetAllAsync()
+        public async Task<IList<BuildingMasterDTO>> GetAllAsync()
         {
-            var modelList = await this._dbContext.CompanyMaster.Where(s => !s.IsDeleted && s.IsActive
-             && s.ClientMasterID == this.Request.ClientID ).ToListAsync();
-            var modelDTOList = Mapper.Map<IList<CompanyMaster>, IList<CompanyMasterDTO>>(modelList);
+            var modelList = await this._dbContext.BuildingMaster.Where(s => !s.IsDeleted && s.IsActive
+             && s.ProjectMasterID == this.Request.ProjectID ).ToListAsync();
+            var modelDTOList = Mapper.Map<IList<BuildingMaster>, IList<BuildingMasterDTO>>(modelList);
             return modelDTOList;
         }
 
-        public async Task<CompanyMasterDTO> GetByIdAsync(long Id)
+        public async Task<BuildingMasterDTO> GetByIdAsync(long Id)
         {
-            var model = await this._dbContext.CompanyMaster.FindAsync(Id);
-            var modelDTO = Mapper.Map<CompanyMaster, CompanyMasterDTO>(model);
+            var model = await this._dbContext.BuildingMaster.FindAsync(Id);
+            var modelDTO = Mapper.Map<BuildingMaster, BuildingMasterDTO>(model);
             return modelDTO;
         }
 
-        public async Task<CompanyMasterDTO> SaveUpdateAsync(CompanyMasterDTO modelDTO)
+        public async Task<BuildingMasterDTO> SaveUpdateAsync(BuildingMasterDTO modelDTO)
         {
-            modelDTO.ClientMasterID = this.Request.ClientID;
+            modelDTO.ProjectMasterID = this.Request.ProjectID;
             modelDTO.UpdatedDate = Converters.GetCurrentEpochTime();
-            var model = Mapper.Map<CompanyMasterDTO, CompanyMaster>(modelDTO);
-            if (model.CompanyMasterID == 0)
+            var model = Mapper.Map<BuildingMasterDTO, BuildingMaster>(modelDTO);
+            if (model.BuildingMasterID == 0)
             {
                 model.CreatedDate = modelDTO.UpdatedDate;
                 model.IsActive = true;
-                await this._dbContext.CompanyMaster.AddAsync(model);
+                await this._dbContext.BuildingMaster.AddAsync(model);
                 await this._dbContext.SaveChangesAsync();
                 this.DisplayMessage = CommonMethods.GetMessage(this.logType, LogAction.Add);
             }
@@ -62,7 +62,7 @@ namespace SocietyApi.BAL
                 await this._dbContext.SaveChangesAsync();
                 this.DisplayMessage = CommonMethods.GetMessage(this.logType, LogAction.Update);
             }
-            modelDTO = Mapper.Map<CompanyMaster, CompanyMasterDTO>(model);
+            modelDTO = Mapper.Map<BuildingMaster, BuildingMasterDTO>(model);
             return modelDTO;
         }
     } 

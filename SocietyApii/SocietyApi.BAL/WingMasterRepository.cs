@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SocietyApi.DATA;
 using SocietyApi.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,9 +29,10 @@ namespace SocietyApi.BAL
             return modelDTO;
         }
 
-        public async Task<IList<WingMasterDTO>> GetAllAsync()
+        public async Task<IList<WingMasterDTO>> GetAllAsync(Int64 buildingMasterID)
         {
-            var modelList = await this._dbContext.WingMaster.Where(s => !s.IsDeleted && s.IsActive).ToListAsync();
+            var modelList = await this._dbContext.WingMaster.Where(s => s.BuildingMasterID == buildingMasterID &&
+            !s.IsDeleted).ToListAsync();
             var modelDTOList = Mapper.Map<IList<WingMaster>, IList<WingMasterDTO>>(modelList);
             return modelDTOList;
         }
