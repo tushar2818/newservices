@@ -15,6 +15,8 @@ namespace SocietyApi
             operation.Parameters.Add(new HeaderParameter() { Name = "ClientID", In = "header", Required = false, Type = "string", Description = "Client ID" });
             operation.Parameters.Add(new HeaderParameter() { Name = "CompanyID", In = "header", Required = false, Type = "string", Description = "Company ID" });
             operation.Parameters.Add(new HeaderParameter() { Name = "UserID", In = "header", Required = false, Type = "string", Description = "User ID" });
+            operation.Parameters.Add(new HeaderParameter() { Name = "PersonID", In = "header", Required = false, Type = "string", Description = "Person ID" });
+            operation.Parameters.Add(new HeaderParameter() { Name = "ProjectID", In = "header", Required = false, Type = "string", Description = "Project ID" });
         }
     }
 }

@@ -8,10 +8,10 @@ using SocietyApi.DTO;
 
 namespace SocietyApi.Controllers
 {
-    public class WingMasterController : BaseController
+    public class BuildingMasterController : BaseController
     {
-        private IWingMasterRepository repository;
-        public WingMasterController(IWingMasterRepository repository)
+        private IBuildingMasterRepository repository;
+        public BuildingMasterController(IBuildingMasterRepository repository)
         {
             this.repository = repository;
         }
@@ -27,16 +27,16 @@ namespace SocietyApi.Controllers
         }
 
         /// <summary>
-        /// Returns all wing masters
+        /// Returns all building master
         /// </summary>
-        /// <returns>All wing masters</returns>
+        /// <returns>All building masters</returns>
         [HttpGet]
-        [Route("api/wingmaster/getall/{buildingmasteriD}")]
-        public async Task<object> GetAll(Int64 buildingmasteriD)
+        [Route("api/buildingmaster/getall")]
+        public async Task<object> GetAll()
         {
             try
             {
-                var data = await repository.GetAllAsync(buildingmasteriD);
+                var data = await repository.GetAllAsync();
                 _response.Result = data;
             }
             catch (Exception ex)
@@ -48,12 +48,12 @@ namespace SocietyApi.Controllers
         }
 
         /// <summary>
-        /// Get wing master details from wing master id
+        /// Get building master details from building master id
         /// </summary>
-        /// <param name="id">wing master Id</param>
-        /// <returns>wing master details</returns>
+        /// <param name="id">building master Id</param>
+        /// <returns>building master Details</returns>
         [HttpGet]
-        [Route("api/wingmaster/getbyid/{id}")]
+        [Route("api/buildingmaster/getbyid/{id}")]
         public async Task<object> GetById(long id)
         {
             try
@@ -70,13 +70,13 @@ namespace SocietyApi.Controllers
         }
 
         /// <summary>
-        /// Save/Update wing master details
+        /// Save/Update building master details
         /// </summary>
-        /// <param name="model">wing master details</param>
-        /// <returns>Added/Updated wing master details</returns>
+        /// <param name="model">building master details</param>
+        /// <returns>Added/Updated building master details</returns>
         [HttpPost]
-        [Route("api/wingmaster/saveupdate")]
-        public async Task<object> Post([FromBody]WingMasterDTO model)
+        [Route("api/buildingmaster/saveupdate")]
+        public async Task<object> Post([FromBody]BuildingMasterDTO model)
         {
             try
             {
@@ -95,12 +95,12 @@ namespace SocietyApi.Controllers
         }
 
         /// <summary>
-        /// Method used to delete wing master
+        /// Method used to delete building master
         /// </summary>
-        /// <param name="id">wing master Id</param>
-        /// <returns>Deleted wing master details</returns>
+        /// <param name="id">building master Id</param>
+        /// <returns>Deleted building master details</returns>
         [HttpDelete]
-        [Route("api/wingmaster/{id}")]
+        [Route("api/buildingmaster/{id}")]
         public async Task<object> Delete(long id)
         {
             try

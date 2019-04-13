@@ -18,12 +18,37 @@ namespace SocietyApi.BAL
 
         public async Task<ClientMasterDTO> DeleteAsync(long Id)
         {
+            var updatedDate= Converters.GetCurrentEpochTime();
             var model = await this._dbContext.ClientMaster.FindAsync(Id);
             model.IsDeleted = true;
-            model.UpdatedDate = Converters.GetCurrentEpochTime();
+            model.UpdatedDate = updatedDate;
             this._dbContext.Entry(model).State = EntityState.Modified;
             await this._dbContext.SaveChangesAsync();
             var modelDTO = Mapper.Map<ClientMaster, ClientMasterDTO>(model);
+
+            //update in person master
+            var personMaster = await this._dbContext.PersonMaster.FirstOrDefaultAsync(s => s.UserID == modelDTO.UserID);
+            if (personMaster != null)
+            {
+                personMaster.UpdatedDate = updatedDate;
+                personMaster.IsDeleted = true; 
+                this._dbContext.Entry(personMaster).State = EntityState.Modified;
+                await this._dbContext.SaveChangesAsync();
+            }
+
+            //update in common designation
+            var commonTableTypeModel = await this._dbContext.CommonTableType.
+                FirstOrDefaultAsync(s => s.CommonTableTypeKey == Constants.CommonTableTypeClientMaster);
+            var commonDesignation = await this._dbContext.CommonDesignation.FirstOrDefaultAsync
+                (s => s.SourceID == model.ClientMasterID && s.CommonTableTypeID == commonTableTypeModel.CommonTableTypeID);
+            if (commonDesignation != null)
+            {
+                commonDesignation.UpdatedDate = updatedDate;
+                commonDesignation.IsDeleted = true;
+                this._dbContext.Entry(commonDesignation).State = EntityState.Modified;
+                await this._dbContext.SaveChangesAsync();
+            }
+
             this.DisplayMessage = CommonMethods.GetMessage(this.logType, LogAction.Delete);
             return modelDTO;
         }
